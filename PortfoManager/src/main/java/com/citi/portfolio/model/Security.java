@@ -1,11 +1,21 @@
 package com.citi.portfolio.model;
 
-public class Security {
+import java.io.Serializable;
+
+public class Security implements Serializable {
     private String securityId;
 
     private String securityName;
 
     private Integer typeId;
+
+    private static final long serialVersionUID = 1L;
+
+    private static int ID_length  = 10;
+
+    public static int getID_length() {
+        return ID_length;
+    }
 
     public String getSecurityId() {
         return securityId;

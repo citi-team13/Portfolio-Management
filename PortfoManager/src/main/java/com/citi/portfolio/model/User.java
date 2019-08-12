@@ -15,6 +15,8 @@ public class User {
 
     private static final long serialVersionUID = 1L;
 
+    private static int ID_length  = 8;
+
     public String getUserId() {
         return userId;
     }
@@ -63,6 +65,11 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
+    public static int getID_length() {
+        return ID_length;
+    }
+
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -79,7 +86,8 @@ public class User {
                 && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
                 && (this.getUserPwd() == null ? other.getUserPwd() == null : this.getUserPwd().equals(other.getUserPwd()))
                 && (this.getUserType() == null ? other.getUserType() == null : this.getUserType().equals(other.getUserType()))
-                && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()));
+                && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()));
     }
 
     @Override

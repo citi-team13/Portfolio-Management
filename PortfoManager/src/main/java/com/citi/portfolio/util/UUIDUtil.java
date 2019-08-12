@@ -19,16 +19,15 @@ public class UUIDUtil {
             "W", "X", "Y", "Z" };
 
     // 8位
-    public static String generateShortUuid() {
+    public static String generateShortUuid(int characters) {
         StringBuffer shortBuffer = new StringBuffer();
         String uuid = UUID.randomUUID().toString().replace("-", "");
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < characters; i++) {
             String str = uuid.substring(i * 4, i * 4 + 4);
             int x = Integer.parseInt(str, 16);
             shortBuffer.append(chars[x % 0x3E]);
         }
         return shortBuffer.toString();
-
     }
 
 }

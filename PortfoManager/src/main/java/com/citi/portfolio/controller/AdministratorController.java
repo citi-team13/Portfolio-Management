@@ -2,7 +2,9 @@ package com.citi.portfolio.controller;
 
 import com.citi.portfolio.common.Result;
 import com.citi.portfolio.infra.services.AdministratorService;
+import com.citi.portfolio.infra.services.SecurityService;
 import com.citi.portfolio.infra.services.UserService;
+import com.citi.portfolio.model.Security;
 import com.citi.portfolio.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +19,10 @@ public class AdministratorController {
 //    @Autowired
 //    private PriceService priceService;
 //
-//    @Autowired
-//    private SecurityService securityService;
+    @Autowired
+    private SecurityService securityService;
 
-    @PostMapping("/funduser")
+    @PostMapping("/fundmanager")
     @ResponseBody
     public Result createFundUser(User user){
         return administratorService.createAFundManager(user);
@@ -92,37 +94,35 @@ public class AdministratorController {
 //    }
 //
 //
-//    /**
-//     * 创建security
-//     */
-//    @PostMapping("/security")
-//    @ResponseBody
-//    public Result createSecurity(SecurityInfo securityInfo){
-//
-//        return securityService.createSecurity(securityInfo);
-//    }
-//
-//    /**
-//     * 查询security(返回price)
-//     */
-//    @GetMapping("/security/{security_id}")
-//    @ResponseBody
-//    public Result readSecurity(@PathVariable(value = "security_id") String securityId,@RequestParam(value = "page",required = false) int page){
-//
-//        return securityService.readSecurity(securityId);
-//    }
-//
-//    /**
-//     * 查询security list
-//     */
-//    @GetMapping("/security")
-//    @ResponseBody
-//    public Result readSecurityList(@RequestParam(value = "search",required = false) String search,
-//                                   @RequestParam(value = "page",required = false) int page,
-//                                   @RequestParam(value = "securityType",required = false) String securityType){
-//
-//        return securityService.readSecurityList(search,securityType,page);
-//    }
+    /**
+     * 创建security
+     */
+    @PostMapping("/security")
+    @ResponseBody
+    public Result createSecurity(Security securityInfo){
+        return securityService.createSecurity(securityInfo);
+    }
+
+    /**
+     * 查询security(返回price)
+     */
+    @GetMapping("/security/{security_id}")
+    @ResponseBody
+    public Result readSecurity(@PathVariable(value = "security_id") String securityId,@RequestParam(value = "page",required = false) int page){
+        return securityService.readSecurity(securityId);
+    }
+
+    /**
+     * 查询security list
+     */
+    @GetMapping("/security")
+    @ResponseBody
+    public Result readSecurityList(@RequestParam(value = "search",required = false) String search,
+                                   @RequestParam(value = "page",required = false) int page,
+                                   @RequestParam(value = "securityType",required = false) String securityType){
+
+        return securityService.readSecurityList(search,securityType,page);
+    }
 
 
 

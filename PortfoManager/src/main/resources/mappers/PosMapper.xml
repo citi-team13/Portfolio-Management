@@ -7,11 +7,100 @@
     <id column="updateTime" jdbcType="CHAR" property="updateTime" />
     <result column="position" jdbcType="REAL" property="position" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    portfolioId, securityId, updateTime, position
+  </sql>
+  <select id="selectByExample" parameterType="com.citi.portfolio.model.PosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pos
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+      and securityId = #{securityId,jdbcType=CHAR}
+      and updateTime = #{updateTime,jdbcType=CHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from pos
     where portfolioId = #{portfolioId,jdbcType=CHAR}
       and securityId = #{securityId,jdbcType=CHAR}
       and updateTime = #{updateTime,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.citi.portfolio.model.PosExample">
+    delete from pos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Pos">
     insert into pos (portfolioId, securityId, updateTime, 
@@ -19,6 +108,84 @@
     values (#{portfolioId,jdbcType=CHAR}, #{securityId,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, 
       #{position,jdbcType=REAL})
   </insert>
+  <insert id="insertSelective" parameterType="com.citi.portfolio.model.Pos">
+    insert into pos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="portfolioId != null">
+        portfolioId,
+      </if>
+      <if test="securityId != null">
+        securityId,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="portfolioId != null">
+        #{portfolioId,jdbcType=CHAR},
+      </if>
+      <if test="securityId != null">
+        #{securityId,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.citi.portfolio.model.PosExample" resultType="java.lang.Integer">
+    select count(*) from pos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pos
+    <set>
+      <if test="record.portfolioId != null">
+        portfolioId = #{record.portfolioId,jdbcType=CHAR},
+      </if>
+      <if test="record.securityId != null">
+        securityId = #{record.securityId,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        updateTime = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pos
+    set portfolioId = #{record.portfolioId,jdbcType=CHAR},
+      securityId = #{record.securityId,jdbcType=CHAR},
+      updateTime = #{record.updateTime,jdbcType=CHAR},
+      position = #{record.position,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.model.Pos">
+    update pos
+    <set>
+      <if test="position != null">
+        position = #{position,jdbcType=REAL},
+      </if>
+    </set>
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+      and securityId = #{securityId,jdbcType=CHAR}
+      and updateTime = #{updateTime,jdbcType=CHAR}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Pos">
     update pos
     set position = #{position,jdbcType=REAL}
@@ -26,15 +193,4 @@
       and securityId = #{securityId,jdbcType=CHAR}
       and updateTime = #{updateTime,jdbcType=CHAR}
   </update>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select portfolioId, securityId, updateTime, position
-    from pos
-    where portfolioId = #{portfolioId,jdbcType=CHAR}
-      and securityId = #{securityId,jdbcType=CHAR}
-      and updateTime = #{updateTime,jdbcType=CHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select portfolioId, securityId, updateTime, position
-    from pos
-  </select>
 </mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.mapper.TransferMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Transfer">
+    <id column="transferId" jdbcType="CHAR" property="transferId" />
+    <result column="requestDate" jdbcType="DATE" property="requestDate" />
+    <result column="startDate" jdbcType="DATE" property="startDate" />
+    <result column="endDate" jdbcType="DATE" property="endDate" />
+    <result column="portfolioId" jdbcType="CHAR" property="portfolioId" />
+    <result column="requesterId" jdbcType="CHAR" property="requesterId" />
+    <result column="objectId" jdbcType="CHAR" property="objectId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from transfer
+    where transferId = #{transferId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.model.Transfer">
+    insert into transfer (transferId, requestDate, startDate, 
+      endDate, portfolioId, requesterId, 
+      objectId)
+    values (#{transferId,jdbcType=CHAR}, #{requestDate,jdbcType=DATE}, #{startDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{portfolioId,jdbcType=CHAR}, #{requesterId,jdbcType=CHAR}, 
+      #{objectId,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Transfer">
+    update transfer
+    set requestDate = #{requestDate,jdbcType=DATE},
+      startDate = #{startDate,jdbcType=DATE},
+      endDate = #{endDate,jdbcType=DATE},
+      portfolioId = #{portfolioId,jdbcType=CHAR},
+      requesterId = #{requesterId,jdbcType=CHAR},
+      objectId = #{objectId,jdbcType=CHAR}
+    where transferId = #{transferId,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select transferId, requestDate, startDate, endDate, portfolioId, requesterId, objectId
+    from transfer
+    where transferId = #{transferId,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select transferId, requestDate, startDate, endDate, portfolioId, requesterId, objectId
+    from transfer
+  </select>
+</mapper>

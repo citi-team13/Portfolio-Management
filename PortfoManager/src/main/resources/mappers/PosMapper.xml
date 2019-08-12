@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.mapper.PosMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Pos">
+    <id column="portfolioId" jdbcType="CHAR" property="portfolioId" />
+    <id column="securityId" jdbcType="CHAR" property="securityId" />
+    <id column="updateTime" jdbcType="CHAR" property="updateTime" />
+    <result column="position" jdbcType="REAL" property="position" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from pos
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+      and securityId = #{securityId,jdbcType=CHAR}
+      and updateTime = #{updateTime,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.model.Pos">
+    insert into pos (portfolioId, securityId, updateTime, 
+      position)
+    values (#{portfolioId,jdbcType=CHAR}, #{securityId,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, 
+      #{position,jdbcType=REAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Pos">
+    update pos
+    set position = #{position,jdbcType=REAL}
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+      and securityId = #{securityId,jdbcType=CHAR}
+      and updateTime = #{updateTime,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select portfolioId, securityId, updateTime, position
+    from pos
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+      and securityId = #{securityId,jdbcType=CHAR}
+      and updateTime = #{updateTime,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select portfolioId, securityId, updateTime, position
+    from pos
+  </select>
+</mapper>

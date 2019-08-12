@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.mapper.PortfolioMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Portfolio">
+    <id column="portfolioId" jdbcType="CHAR" property="portfolioId" />
+    <result column="portfolioName" jdbcType="CHAR" property="portfolioName" />
+    <result column="positionId" jdbcType="CHAR" property="positionId" />
+    <result column="ownerId" jdbcType="CHAR" property="ownerId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from portfolio
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.model.Portfolio">
+    insert into portfolio (portfolioId, portfolioName, positionId, 
+      ownerId)
+    values (#{portfolioId,jdbcType=CHAR}, #{portfolioName,jdbcType=CHAR}, #{positionId,jdbcType=CHAR}, 
+      #{ownerId,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Portfolio">
+    update portfolio
+    set portfolioName = #{portfolioName,jdbcType=CHAR},
+      positionId = #{positionId,jdbcType=CHAR},
+      ownerId = #{ownerId,jdbcType=CHAR}
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select portfolioId, portfolioName, positionId, ownerId
+    from portfolio
+    where portfolioId = #{portfolioId,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select portfolioId, portfolioName, positionId, ownerId
+    from portfolio
+  </select>
+</mapper>

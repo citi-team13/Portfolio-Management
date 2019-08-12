@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.mapper.SecurityMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Security">
+    <id column="securityId" jdbcType="CHAR" property="securityId" />
+    <result column="securityName" jdbcType="CHAR" property="securityName" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from security
+    where securityId = #{securityId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.model.Security">
+    insert into security (securityId, securityName, typeId
+      )
+    values (#{securityId,jdbcType=CHAR}, #{securityName,jdbcType=CHAR}, #{typeId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Security">
+    update security
+    set securityName = #{securityName,jdbcType=CHAR},
+      typeId = #{typeId,jdbcType=INTEGER}
+    where securityId = #{securityId,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select securityId, securityName, typeId
+    from security
+    where securityId = #{securityId,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select securityId, securityName, typeId
+    from security
+  </select>
+</mapper>

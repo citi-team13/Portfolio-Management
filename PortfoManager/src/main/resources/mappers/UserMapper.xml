@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.model.User">
+    <id column="UserId" jdbcType="CHAR" property="userId" />
+    <result column="UserName" jdbcType="CHAR" property="userName" />
+    <result column="UserPwd" jdbcType="CHAR" property="userPwd" />
+    <result column="UserType" jdbcType="INTEGER" property="userType" />
+    <result column="Phone" jdbcType="CHAR" property="phone" />
+    <result column="Email" jdbcType="CHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UserId, UserName, `UserPwd`, `UserType`, Phone, Email
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where UserId = #{userId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.model.User">
+    insert into user (UserId, UserName, UserPwd, 
+      UserType, Phone, Email)
+    values (#{userId,jdbcType=CHAR}, #{userName,jdbcType=CHAR}, #{userPwd,jdbcType=CHAR}, 
+      #{userType,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, #{email,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.User">
+    update user
+    set UserName = #{userName,jdbcType=CHAR},
+      UserPwd = #{userPwd,jdbcType=CHAR},
+      UserType = #{userType,jdbcType=INTEGER},
+      Phone = #{phone,jdbcType=CHAR},
+      Email = #{email,jdbcType=CHAR}
+    where UserId = #{userId,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select UserId, UserName, UserPwd, UserType, Phone, Email
+    from user
+    where UserId = #{userId,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select UserId, UserName, UserPwd, UserType, Phone, Email
+    from user
+  </select>
+  <select id="listAllFundManager" resultMap="BaseResultMap">
+    select UserId, UserName, UserPwd, UserType, Phone, Email
+    from user
+    where UserType = 0
+  </select>
+  <select id="queryUserInfoByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where Phone = #{phone,jdbcType=CHAR}
+  </select>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.citi.portfolio.model.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        UserId,
+      </if>
+      <if test="userName != null">
+        UserName,
+      </if>
+      <if test="userPwd != null">
+        `UserPwd`,
+      </if>
+      <if test="userType != null">
+        `UserType`,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

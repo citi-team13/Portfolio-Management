@@ -111,7 +111,12 @@ export class HomePageComponent implements OnInit {
       if(this.login){
       this.user = data;
       this.items = this.loginSetting[data.utype];
+      if(data.utype==0){
       this.router.navigate(['home/FundManagement']);
+      }
+      else if(data.utype==1){
+        this.router.navigate(['home/Fund']);
+        }
       }
       else{
         this.Login();

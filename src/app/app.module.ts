@@ -36,6 +36,12 @@ import {PortfolioService} from './service/portfolio.service';
 import {PaginatorModule} from 'primeng/paginator';
 import {RequestsComponent} from './components/transfor/requests/requests.component';
 import {HistoryComponent} from './components/transfor/history/history.component';
+import {AddUserComponent} from './components/add-user/add-user.component';
+import {PasswordModule} from 'primeng/password';
+
+import {UserService2Service} from './service/user-service2.service';
+import {UpdateComponent} from "./components/market/update/update.component"
+import {FundChartComponent} from "./components/market/fund-chart/fund-chart.component"
 
 
 @NgModule({
@@ -55,8 +61,13 @@ import {HistoryComponent} from './components/transfor/history/history.component'
     CreateFundComponent,
     AutoSecurityMatchComponent,
     RequestsComponent,
-    HistoryComponent
+    HistoryComponent,
+    AddUserComponent,
+    UpdateComponent,
+    FundChartComponent
+    
   ],
+  entryComponents:[UpdateComponent,FundChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -71,9 +82,10 @@ import {HistoryComponent} from './components/transfor/history/history.component'
     HttpClientModule,
     DropdownModule,
     AutoCompleteModule,
-    PaginatorModule
+    PaginatorModule,
+    PasswordModule,
   ],
-  providers: [UserService,SecurityService,PortfolioService],
+  providers: [UserService,SecurityService,PortfolioService,UserService2Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -44,7 +44,7 @@
                                     <span class='span-default create-time'>{{con.portfolio_name}}</span>
                                     <span class='span-default create-time'>{{con.rate}}</span>
                                     <span class='span-default create-time'>
-                                        <button pButton type="button"  label="{{con.details}}" (click)='chartShow(c)' class="span-default"></button>
+                                        <button pButton type="button"  label="{{con.details}}" (click)='chartShow()' class="span-default"></button>
                                     </span>
                                 </li>
                             </div>
@@ -71,28 +71,11 @@
 
 
 
-            <p-tabPanel header="Add">
-                <div class="add-wrapper">
-                    <div class="add-manager">
-                        <div>
-                            <label class="add-label"> Manager Name</label>
-                            <input type="text">
-                        </div>
-                        <div>
-                            <label class="add-label"> Password</label>
-                            <input type="password">
-                        </div>
-                        <div class="add-button-wrapper">
-                            <button pButton type="button"
-                                    label='submit' 
-                                    class="ui-button-raised ui-button-rounded add-button"
-                                    (click)='submit()'>
-                            </button>
-                        </div>
-                    </div>
 
-                </div>
-            </p-tabPanel>
+                    <p-tabPanel header="Add">
+                            <app-add-user></app-add-user>
+                        </p-tabPanel>
+    
     </p-tabView>
 
 </div>

@@ -58,26 +58,7 @@
 
 
             <p-tabPanel header="Add">
-                <div class="add-wrapper">
-                    <div class="add-manager">
-                        <div>
-                            <label class="add-label"> Manager Name</label>
-                            <input type="text">
-                        </div>
-                        <div>
-                            <label class="add-label"> Password</label>
-                            <input type="password">
-                        </div>
-                        <div class="add-button-wrapper">
-                            <button pButton type="button"
-                                    label='submit' 
-                                    class="ui-button-raised ui-button-rounded add-button"
-                                    (click)='submit()'>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+                <app-add-user></app-add-user>
             </p-tabPanel>
     </p-tabView>
 

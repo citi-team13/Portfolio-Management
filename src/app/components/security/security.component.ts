@@ -16,7 +16,7 @@ export class SecurityComponent implements OnInit {
   noSpecial: RegExp = /^[^<>*!]+$/
 
   security1:SelectItem[];
-  selectedItem:security;
+  selectedType:security;
   newSecurityName:string;
   newSecurityPrice:number;
 
@@ -36,11 +36,11 @@ export class SecurityComponent implements OnInit {
       {label:'FX',value:{name:"FX",sid:3}}
     ];
 
-    this.selectedItem = this.security1[0].value;
+    this.selectedType = this.security1[0].value;
   }
 
   addSecurity(){
-    console.log(this.selectedItem);
+    console.log(this.selectedType);
     console.log(this.newSecurityName);
     console.log(this.newSecurityPrice);
   }

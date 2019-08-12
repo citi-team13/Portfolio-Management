@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-market',
   templateUrl: './market.component.html',
@@ -7,35 +7,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
 
-
-  items:object;
-  currentIndex:number;
-
-
-
+  list: object;
+  //private messageservice:MessageService
+     
   constructor() {
-    this.initItem();
-
+    //this.messageservice;
+    this.setData();
    }
 
   ngOnInit() {
   }
 
-  initItem(){
-
-    this.items = [{
-      'name':'aaa',
-      'content':'bbb',
-      'status':false
-    },{
-      'name':'ccc',
-      'content':'ddd',
-      'status':false
-    },
-
-  ]
+  setData(){
+    this.list = [
+      { name:'mike',
+        details:'blabla',
+        content:'……………………………………………………',
+        isShow:false
+      },{
+        name:'lily',
+        details:'blabla',
+        content:'2222222',
+        isShow:false
+      },{
+        name:'lily',
+        details:'blabla',
+        content:'3333333',
+        isShow:false
+      },{
+        name:'lily',
+        details:'blabla',
+        content:'444444444',
+        isShow:false
+      }]
   }
 
-
-
+  toggle(index){
+    this.list[index].isShow = !this.list[index].isShow;
+  }
+  delete(index){
+    //this.messageservice.add({summary:'Success', detail:'Data Saved'});
+    console.log('delete'+(index+1))
+  }
+  update(index){
+    console.log('update'+(index+1))
+  }
+  submit(){
+    console.log('submit')
+  }
 }

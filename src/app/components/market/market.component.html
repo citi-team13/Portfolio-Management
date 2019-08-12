@@ -1,31 +1,84 @@
-<div class="div-container-90">
+<div class="main-container">
 
 <div class="market-header">
     <p-tabView>
             <p-tabPanel header="Fund Managaers">
 
+                <div>
+                    <li class="market-list list-border">
+                        <span class='name'>NAME</span>
+                        <span class='details'>DETAILS</span>
+                        <span class='option option-th'>OPTION</span>
+                    </li>
+                    <li *ngFor="let item of list ; let i = index" class="market-list market-list-line" >
+                        <div class="li-line">
+                            <span class='name'>{{item.name}}</span>
+                            <span class='details'>{{item.details}}</span>
+                            <span class="option">
+                                <button pButton type="button"
+                                                label='details' 
+                                                class="ui-button-raised ui-button-rounded"
+                                                (click)='toggle(i)'>
+                                </button>
+                                <button pButton type="button"
+                                                label='delete' 
+                                                class="ui-button-raised ui-button-rounded delete"
+                                                (click)='delete(i)'>
+                                </button>
+                                <button pButton type="button"
+                                                label='update' 
+                                                class="ui-button-raised ui-button-rounded update"
+                                                (click)='update(i)'>
+                                </button>
+                            </span>
+                            <div *ngIf='item.isShow' ng-transclude>
+                                {{item.content}}
+                            </div>
+                        </div>
 
-                <div *ngFor="let ele of items;let i = index;">
-
-                    <div class="test-title">hello  <button (click)="changeDiv(i)">1111</button> </div>
-                    <div *ngIf="currentIndex==i">
-                        ggggggg
-                    </div>
+                    </li>
                 </div>
-
-              
-
-             </p-tabPanel>
-
-                 
+                <div class="page">
+                    <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>
+                </div>
+            </p-tabPanel>
 
 
 
 
 
-                 <p-tabPanel header="Add">
-                     <h1> Here will append new manager</h1>
-                 </p-tabPanel>
+
+
+
+
+
+
+
+
+
+
+            <p-tabPanel header="Add">
+                <div class="add-wrapper">
+                    <div class="add-manager">
+                        <div>
+                            <label class="add-label"> Manager Name</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label class="add-label"> Password</label>
+                            <input type="password">
+                        </div>
+                        <div class="add-button-wrapper">
+                            <button pButton type="button"
+                                    label='submit' 
+                                    class="ui-button-raised ui-button-rounded add-button"
+                                    (click)='submit()'>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </p-tabPanel>
     </p-tabView>
 
 </div>

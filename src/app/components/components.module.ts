@@ -12,11 +12,13 @@ import { CreateFundComponent } from './create-fund/create-fund.component';
 import { RequestsComponent } from './transfor/requests/requests.component';
 import { HistoryComponent } from './transfor/history/history.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { FundListComponent } from './fund/fund-list/fund-list.component';
+import { AddFundComponent } from './fund/add-fund/add-fund.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, MarketComponent, UpdatePriceComponent, SecurityComponent, TransforComponent, FundComponent, CreateFundComponent, RequestsComponent, HistoryComponent, AddUserComponent],
+  declarations: [LoginComponent, MarketComponent, UpdatePriceComponent, SecurityComponent, TransforComponent, FundComponent, CreateFundComponent, RequestsComponent, HistoryComponent, AddUserComponent, FundListComponent, AddFundComponent],
   imports: [
     CommonModule,
     ComponentsRoutingModule

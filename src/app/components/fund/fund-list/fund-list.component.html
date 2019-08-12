@@ -1,0 +1,43 @@
+<div class="div-container-90">
+        <div class="panel-header">
+                <div class="ui-g-2"> <h3>Latest Date</h3></div>
+                <div class="ui-g-2"><h3>Created Date</h3> </div>
+                <div class="ui-g-2"><h3>Price</h3></div>
+                <div class="ui-g-2"><h3>Change Rate</h3></div>
+                <div class="ui-g-4"><h3>Options</h3></div>
+    
+            </div>
+    </div>
+    
+    <div class="header-line">
+    
+    </div>
+    
+    
+    <div class="div-container-90" *ngFor="let item of currentData;let i=index;">
+    
+    
+    
+    <div class="sub-child">
+    
+            <div class="ui-g-2"> <h4>{{item.latestDate}}</h4></div>
+            <div class="ui-g-2">{{item.createDate}}</div>
+            <div class="ui-g-2">{{item.price}} </div>
+            <div class="ui-g-2" *ngIf="item.changeRate<0" style="color: red;" >{{item.changeRate}}% </div>
+            <div class="ui-g-2" *ngIf="item.changeRate==0" style="color: #2f2f2f;" >{{item.changeRate}}% </div>
+            <div class="ui-g-2" *ngIf="item.changeRate>0" style="color: green;" >{{item.changeRate}}% </div>
+            <div class="ui-g-4">
+                <button pButton type="button" (click)="acceptRequest(i)" label="Accept" class="ui-button-raised ui-button-success" style="margin-right:1rem;"></button>
+    
+                <button pButton type="button" (click)="rejectRequest(i)" label="Reject" class="ui-button-raised ui-button-danger"></button>
+            </div>
+    
+    </div>
+    
+    <div class="clear-div"></div>
+
+
+
+    </div>
+    
+    <p-paginator [rows]="10" [totalRecords]="100" (onPageChange)="paginate($event)" ></p-paginator>

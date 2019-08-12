@@ -40,6 +40,7 @@ import {AddUserComponent} from './components/add-user/add-user.component';
 import {PasswordModule} from 'primeng/password';
 
 import {UserService2Service} from './service/user-service2.service';
+import {FundListComponent} from '../app/components/fund/fund-list/fund-list.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import {UserService2Service} from './service/user-service2.service';
     AutoSecurityMatchComponent,
     RequestsComponent,
     HistoryComponent,
-    AddUserComponent
+    AddUserComponent,
+    FundListComponent
   ],
   imports: [
     BrowserModule,

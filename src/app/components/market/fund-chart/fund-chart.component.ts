@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DynamicDialogRef} from 'primeng/api';
+import {DynamicDialogConfig} from 'primeng/api';
 
 @Component({
   selector: 'app-fund-chart',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FundChartComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit() {
   }

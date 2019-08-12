@@ -1,4 +1,4 @@
-import { Component, OnInit,Injectable } from '@angular/core';
+import { Component, OnInit,Injectable,ViewEncapsulation } from '@angular/core';
 import {SecurityService} from "../../service/security.service";
 import {DynamicDialogRef , DynamicDialogConfig , DialogService} from 'primeng/api';
 import {FundChartComponent} from '../../components/market/fund-chart/fund-chart.component';
@@ -7,7 +7,8 @@ import {FundChartComponent} from '../../components/market/fund-chart/fund-chart.
   selector: 'app-market',
   templateUrl: './market.component.html',
   styleUrls: ['./market.component.scss'],
-  providers:[DialogService]  
+  providers:[DialogService],
+  encapsulation:ViewEncapsulation.None
 
 })
 export class MarketComponent implements OnInit {

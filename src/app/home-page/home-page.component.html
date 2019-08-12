@@ -17,7 +17,7 @@
 
                 <button pButton label="Login" (click)="Login()"  *ngIf="!login" icon="fa fa-sign-in" iconPos="left"  ></button>
 
-                <div *ngIf="login" class="welcome"><span style="color: orange;">{{user.name}}</span>
+                <div *ngIf="login" class="welcome"><span style="color: orange;">{{user.userName}}</span>
                     <button pButton label="Exit" icon="fa fa-mail-forward" iconPos="left" style="left: 2rem;" (click)="Exit()"></button>
                 </div>
         </p-menubar>

@@ -1,7 +1,10 @@
 import { Component, OnInit,Injectable } from '@angular/core';
 import {SecurityService} from "../../service/security.service";
-import {DynamicDialogRef , DynamicDialogConfig , DialogService} from 'primeng/api';
+import {DialogService} from 'primeng/api';
+import {DynamicDialogRef} from 'primeng/api';
+import {DynamicDialogConfig} from 'primeng/api';
 import {FundChartComponent} from '../../components/market/fund-chart/fund-chart.component';
+import {UpdateComponent} from '../../components/market/update/update.component';
 
 @Component({
   selector: 'app-market',
@@ -25,7 +28,7 @@ export class MarketComponent implements OnInit {
   ngOnInit() {
   }
   setData(){
-    
+   /* 
     this.list = [
       { name:'mike',
         details:'blabla',
@@ -47,7 +50,7 @@ export class MarketComponent implements OnInit {
         content:'444444444',
         isShow:false
       }]
-      
+     */ 
     this.service.getMarket().subscribe(data=>{
       this.list_2=data;
       console.log(this.list_2);
@@ -63,8 +66,11 @@ export class MarketComponent implements OnInit {
     //this.messageservice.add({summary:'Success', detail:'Data Saved'});
     console.log('delete'+(index+1))
   }
-  update(index){
-    console.log('update'+(index+1))
+  update(){
+    const ref = this.dialogService.open(UpdateComponent,{
+      header:'update',
+      width:'80%'
+    })
   }
   submit(){
     console.log('submit')

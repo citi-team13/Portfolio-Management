@@ -12,10 +12,17 @@ export class SecurityService {
   getCountries() {
     this.url = "../../assets/test.json";
     return this.http.get(this.url);
+  }
+
+  getMarket(){
+    this.url='../../assets/fundManager.json';
+    return this.http.get(this.url);
+  }
+
+  getManager(){
+      this.url='../../assets/mockData/updateData.json';
+      return this.http.get(this.url)
+  }
+  
 }
 
-getMarket(){
-  this.url='../../assets/fundManager.json';
-  return this.http.get(this.url);
-  }
-}

@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import {Router} from '@angular/router';
 import {DynamicDialogRef , DynamicDialogConfig , DialogService} from 'primeng/api';
 import {LoginComponent} from '../components/login/login.component';
+import {UserService2Service} from '../service/user-service2.service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,46 +15,13 @@ import {LoginComponent} from '../components/login/login.component';
 export class HomePageComponent implements OnInit {
 
   items: MenuItem[];
-  item2s:MenuItem[];
   loginItems:MenuItem[];
   login:boolean;
   user:object;
-  constructor(private router:Router , public dialogService: DialogService) { }
+  loginSetting = [];
+  constructor(private router:Router , public dialogService: DialogService,private service:UserService2Service) {
 
-  Login(){
-
-    //this.router.navigate(['login']);
-    const ref = this.dialogService.open(LoginComponent,{
-      header:'Login',
-      width:'20%'
-    });
-
-    ref.onClose.subscribe((data:any)=>{
-      if(data != null && data.hasOwnProperty('login')){
-      this.user = data;
-      this.login = data.login;
-      }
-    })
-
-
-    this.router.navigate(['home']);
-
-  }
-
-  Exit(){
-/*
-         connect to back office 
-
-         codes here
-*/
-
-    this.user = null;
-    this.login = false;
-  }
-
-  ngOnInit() {
-    // initial items of navigator
-    this.items = [
+    this.loginSetting =[ [
       {
         label:'Fund Management',
         command: ()=>this.toFundManagement()
@@ -76,10 +44,10 @@ export class HomePageComponent implements OnInit {
         label:'Transfor',
         command:()=>this.toTransfor()
       }
-    ];
+    ],
 
 
-    this.item2s = [
+    [
       {
         label:'Fund List',
         command: ()=>this.toFund()
@@ -91,7 +59,65 @@ export class HomePageComponent implements OnInit {
         command:()=>this.toCreateFund()
  
       }
-    ];
+    ]
+  ]
+}
+
+  Login(){
+
+    //this.router.navigate(['login']);
+    const ref = this.dialogService.open(LoginComponent,{
+      header:'Login',
+      width:'20%'
+    });
+
+    ref.onClose.subscribe((data:any)=>{
+      if(data != null && data.hasOwnProperty('login')){
+      console.log(data);
+      this.login = data.login;
+      if(this.login){
+      this.user = data;
+      this.items = this.loginSetting[data.utype];
+      this.router.navigate(['home/FundManagement']);
+      }
+      }
+    })
+    this.router.navigate(['home']);
+
+
+  }
+
+  Exit(){
+/*
+         connect to back office 
+
+         codes here
+*/
+    this.user = null;
+    this.login = false;
+    this.items = [];
+    this.service.userExit();
+    this.router.navigate(['home']);
+    this.Login();
+
+  }
+
+  ngOnInit() {
+    // initial items of navigator
+
+    //check if login , otherwise exec login
+    this.service.userLoginCheck().subscribe((data:any)=>{
+      this.login = data.login;
+      if(this.login){
+      this.user = data;
+      this.items = this.loginSetting[data.utype];
+      this.router.navigate(['home/FundManagement']);
+      }
+      else{
+        this.Login();
+      }
+      });
+    
 
 // initial items of login or sign etc. options
     this.loginItems = [

@@ -1,28 +1,29 @@
 
-    <span><h4>*Select User Type</h4></span>
-    <p-dropdown [options]="userTypes" [(ngModel)]="selectedType" class="fix-width-2"></p-dropdown>
+<div></div>
+                   <span><h4>*Select User Type</h4></span>
+                    <p-dropdown [options]="userTypes" [(ngModel)]="selectedType" class="fix-width-2"></p-dropdown>
 
-    <div style="margin-top: 2rem;"></div>
-    <span><h4>*User Name</h4></span>
-    <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="newUserName" class="fix-width-2"   > 
+                    <div style="margin-top: 2rem;"></div>
+                    <span><h4>*User Name</h4></span>
+                    <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="newUserName" class="fix-width-2"   > 
                     
-    <div style="margin-top: 2rem;"></div>
-    <span><h4>*Eamil Address</h4></span>
-    <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="userEmail" class="fix-width-2"  >  
+                    <div style="margin-top: 2rem;"></div>
+                    <span><h4>*Eamil Address</h4></span>
+                    <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="userEmail" class="fix-width-2"  >  
                     
-    <div style="margin-top: 2rem;"></div>
-    <span><h4>*Input phone number</h4></span>
-    <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="newUserPhone" class="fix-width-2"   > 
+                    <div style="margin-top: 2rem;"></div>
+                    <span><h4>*Input phone number</h4></span>
+                    <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="newUserPhone" class="fix-width-2"   > 
                     
-    <div style="margin-top: 2rem;"></div>
-    <span><h4>*Password</h4></span>
-    <input pPassword type="password" [pKeyFilter]="noSpecial" [(ngModel)]="userPwd" class="fix-width-2"  > 
+                    <div style="margin-top: 2rem;"></div>
+                    <span><h4>*Password</h4></span>
+                    <input pPassword type="password" [pKeyFilter]="noSpecial" [(ngModel)]="userPwd" class="fix-width-2"  > 
 
-    <div style="margin-top: 2rem;"></div>
-    <span><h4>*Confirm password</h4></span>
-    <input pInputText type="password" [pKeyFilter]="noSpecial" [(ngModel)]="userConfirmPwd" class="fix-width-2"  placeholder="" >
-    <span *ngIf="userPwd!=null&& userConfirmPwd!=null && userPwd !=userConfirmPwd"><h5 style="color: red;">*different password between twice input</h5></span>
+                    <div style="margin-top: 2rem;"></div>
+                    <span><h4>*Confirm password</h4></span>
+                    <input pInputText type="password" [pKeyFilter]="noSpecial" [(ngModel)]="userConfirmPwd" class="fix-width-2"  placeholder="" >
+                    <span *ngIf="userPwd!=null&& userConfirmPwd!=null && userPwd !=userConfirmPwd"><h5 style="color: red;">*different password between twice input</h5></span>
     
-    <div style="margin-top: 2rem;"></div>
-    <button pButton label="Add" (click)="addUser()" class="fix-width-2"></button>
-    <div style="margin-top: 2rem;"></div>
+                    <div style="margin-top: 2rem;"></div>
+                    <button pButton label="Add" (click)="addUser()" class="fix-width-2"></button>
+                    <div style="margin-top: 2rem;"></div>

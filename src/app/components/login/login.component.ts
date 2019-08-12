@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   loginMsg:any = {'login':false};
 
   login(){
+
+
     this.service.userLogin({'phone':this.userPhone,'pwd':this.userPwd}).subscribe((data:any)=>{
       this.loginMsg = data;
       this.ngOnInit();

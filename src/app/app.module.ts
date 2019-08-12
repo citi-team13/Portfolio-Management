@@ -62,12 +62,17 @@ import {FundChartComponent} from "./components/market/fund-chart/fund-chart.comp
     AutoSecurityMatchComponent,
     RequestsComponent,
     HistoryComponent,
+<<<<<<< HEAD
     AddUserComponent,
     UpdateComponent,
     FundChartComponent
     
   ],
   entryComponents:[UpdateComponent,FundChartComponent],
+=======
+    AddUserComponent
+  ],
+>>>>>>> origin/dev
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -83,7 +88,11 @@ import {FundChartComponent} from "./components/market/fund-chart/fund-chart.comp
     DropdownModule,
     AutoCompleteModule,
     PaginatorModule,
+<<<<<<< HEAD
     PasswordModule,
+=======
+    PasswordModule
+>>>>>>> origin/dev
   ],
   providers: [UserService,SecurityService,PortfolioService,UserService2Service],
   bootstrap: [AppComponent]

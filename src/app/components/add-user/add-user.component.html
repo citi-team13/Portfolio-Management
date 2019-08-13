@@ -22,7 +22,7 @@
     <span><h4>*Confirm password</h4></span>
     <input pInputText type="password" [pKeyFilter]="noSpecial" [(ngModel)]="userConfirmPwd" class="fix-width-2"  placeholder="" >
     <span *ngIf="userPwd!=null&& userConfirmPwd!=null && userPwd !=userConfirmPwd"><h5 style="color: red;">*different password between twice input</h5></span>
-    
+
     <div style="margin-top: 2rem;"></div>
     <button pButton label="Add" (click)="addUser()" class="fix-width-2"></button>
     <div style="margin-top: 2rem;"></div>

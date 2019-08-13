@@ -9,6 +9,7 @@ import {SecurityComponent} from './components/security/security.component';
 import {TransforComponent} from './components/transfor/transfor.component';
 import {FundComponent} from './components/fund/fund.component';
 import {CreateFundComponent} from './components/create-fund/create-fund.component';
+import {SecurityMarketComponent} from './components/security-market/security-market.component'
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
 
     {path:'Fund',component:FundComponent},
 
-    {path:'CreateFund',component:CreateFundComponent}
+    {path:'CreateFund',component:CreateFundComponent},
+
+    {path:'SecurityMarket',component:SecurityMarketComponent}
 
 
 ]

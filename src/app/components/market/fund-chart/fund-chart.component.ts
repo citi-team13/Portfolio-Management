@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DynamicDialogRef} from 'primeng/api';
 import {DynamicDialogConfig} from 'primeng/api';
-
 import {FundService} from '../../../service/fund.service';
 @Component({
   selector: 'app-fund-chart',
@@ -9,7 +8,6 @@ import {FundService} from '../../../service/fund.service';
   styleUrls: ['./fund-chart.component.scss']
 })
 export class FundChartComponent implements OnInit {
-
   data:any;
   options:any;
   formatData:Array<object>;
@@ -95,6 +93,4 @@ filterLabel(data:any){
 
   return tempArr;
 }
-
-
 }

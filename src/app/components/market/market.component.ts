@@ -14,9 +14,8 @@ import {UpdateComponent} from '../../components/market/update/update.component';
 
 })
 export class MarketComponent implements OnInit {
-  url:String;
   list: Array<any>;
-  list_2: object;
+
   currentPage:number=0;
   perPageNum :number= 8;
   currentData:Array<any>;
@@ -29,16 +28,11 @@ export class MarketComponent implements OnInit {
   ngOnInit() {
   }
   setData(){
+
     this.service.getMarket().subscribe(data=>{
-      this.list_2=data;
       this.list=JSON.parse(JSON.stringify(data)); 
-      //this.currentData = this.list;
-      
       this.currentData = this.list.slice(0,this.perPageNum)  
     });
-    
-  }
-  changeDataType(){
     
   }
 
@@ -64,18 +58,15 @@ export class MarketComponent implements OnInit {
       header:'chart',
       width:'60%'
     });
-
   }
   pageChange(event){
-    console.log('event page',event.page)
     this.currentPage = event.page;
-
     console.log(this.currentPage)
     if(this.currentPage*this.perPageNum>(this.list.length-1)){
       //重新请求数据
     }
     else{
-      this.currentData = this.list.slice(this.currentPage*this.perPageNum,Math.min(this.currentPage*this.perPageNum+this.perPageNum,this.list.length-1));
+      this.currentData = this.list.slice(this.currentPage*this.perPageNum,Math.min(this.currentPage*this.perPageNum+this.perPageNum,this.list.length));
     }
   }
 }

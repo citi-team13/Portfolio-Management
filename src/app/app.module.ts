@@ -38,14 +38,13 @@ import {RequestsComponent} from './components/transfor/requests/requests.compone
 import {HistoryComponent} from './components/transfor/history/history.component';
 import {AddUserComponent} from './components/add-user/add-user.component';
 import {PasswordModule} from 'primeng/password';
-
 import {UserService2Service} from './service/user-service2.service';
 import {UpdateComponent} from "./components/market/update/update.component";
 import {FundChartComponent} from "./components/market/fund-chart/fund-chart.component";
 import {FundListComponent} from './components/fund/fund-list/fund-list.component';
-
 import {ChartModule} from 'primeng/chart';
 import {FundService} from './service/fund.service';
+import {SecurityMarketComponent} from './components/security-market/security-market.component'
 
 
 @NgModule({
@@ -69,10 +68,12 @@ import {FundService} from './service/fund.service';
     AddUserComponent,
     UpdateComponent,
     FundChartComponent,
-    FundListComponent
+    FundListComponent,
+    SecurityMarketComponent
     
   ],
-  entryComponents:[UpdateComponent,FundChartComponent],
+  entryComponents:[UpdateComponent,FundChartComponent,SecurityMarketComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -92,6 +93,7 @@ import {FundService} from './service/fund.service';
     ChartModule
   ],
   providers: [UserService,SecurityService,PortfolioService,UserService2Service,FundService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

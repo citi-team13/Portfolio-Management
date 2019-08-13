@@ -10,7 +10,9 @@
     background: rgba(238,238,238,0.4)
 }
 .list-border{
-    border-bottom:0.06rem solid #999999
+    border-bottom:0.06rem solid #999999;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 .span-default{
     display: inline-block;
@@ -87,3 +89,4 @@
     width: 200px;
     text-align: center;
 }
+

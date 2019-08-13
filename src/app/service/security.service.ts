@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -20,9 +21,20 @@ export class SecurityService {
   }
 
   getManager(){
-      this.url='../../assets/mockData/updateData.json';
-      return this.http.get(this.url)
+    this.url='../../assets/mockData/updateData.json';
+    return this.http.get(this.url)
   }
   
+  getFundList(){
+    this.url='../../assets/mockData/fundlistData.json';
+    return this.http.get(this.url)
+  }
+  getEquityList(){
+    this.url='../../assets/mockData/equityListData.json';
+    return this.http.get(this.url)
+  }
+  getFundList2(){
+    this.url='../../assets/mockData/bondlistData.json';
+    return this.http.get(this.url)
+  }
 }
-

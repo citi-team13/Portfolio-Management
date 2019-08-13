@@ -1,35 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 
+import {SecurityService} from "../../../service/security.service";
+import {DialogService} from 'primeng/api';
+import {DynamicDialogRef} from 'primeng/api';
+import {DynamicDialogConfig} from 'primeng/api';
+import {FundChartComponent} from '../../market/fund-chart/fund-chart.component';
+import {UpdateComponent} from '../../market/update/update.component';
 @Component({
   selector: 'app-fund-list',
   templateUrl: './fund-list.component.html',
-  styleUrls: ['./fund-list.component.scss']
+  styleUrls: ['./fund-list.component.scss'],
+  providers:[DialogService] 
 })
 export class FundListComponent implements OnInit {
-  item = {
-    'latestDate':'2019-01-01',
-    'createDate':'2019-01-07',
-    'price':'28.42',
-    'changeRate':'0.01'
-}
+  list: Array<any>;
+  currentPage:number=0;
+  perPageNum :number= 8;
+  currentData:Array<any>;
 
-item2 = {
-  'latestDate':'2019-01-07',
-  'createDate':'2019-01-15',
-  'price':'15.31',
-  'changeRate':'-0.03'
-}
+  constructor(private service:SecurityService, public dialogService: DialogService) {
+    this.setData();
+   }
 
-  data:object[] = [
-    this.item,this.item2,this.item2,this.item,this.item,this.item2,this.item2,this.item,
-    this.item2,this.item,this.item2,this.item2,this.item,this.item,this.item2,this.item2,
-    this.item2,this.item2,this.item2,this.item,this.item,this.item,this.item,this.item2,
-  ];
-  currentPage = 0;
-  perPageNum = 8
-  currentData = this.data.slice(0,this.perPageNum);
-
-  constructor() { }
 
   ngOnInit() {
   }
@@ -43,15 +35,44 @@ item2 = {
     console.log("reject",i);
   }
 
+
+  setData(){
+    this.service.getFundList().subscribe(data=>{
+      this.list=JSON.parse(JSON.stringify(data)); 
+      this.currentData = this.list.slice(0,this.perPageNum)  
+    });
+  }  
+
+  toggle(index){
+    this.currentData[index].isShow = !this.currentData[index].isShow;
+    console.log('change!',this.currentData[index].content[0]);
+  }
+
+
+  chartShow(){    
+    const ref = this.dialogService.open(FundChartComponent,{
+      header:'chart',
+      width:'60%'
+    });
+
+  }
+
+  update(){
+    const ref = this.dialogService.open(UpdateComponent,{
+      header:'update',
+      width:'80%'
+    })
+  }
+  
   paginate(event) {
     console.log("current page:",event.page);
     this.currentPage = event.page;
-    if(this.currentPage*this.perPageNum>(this.data.length-1)){
+    if(this.currentPage*this.perPageNum>(this.list.length-1)){
       //重新请求数据
     }
     else{
-      this.currentData = this.data.slice(this.currentPage*this.perPageNum,Math.min(this.currentPage*this.perPageNum+this.perPageNum,this.data.length-1));
+      this.currentData = this.list.slice(this.currentPage*this.perPageNum,Math.min(this.currentPage*this.perPageNum+this.perPageNum,this.list.length));
     }
+  }
 
-}
 }

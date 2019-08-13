@@ -1,0 +1,65 @@
+<div class="main-container">
+    <div class="market-header">
+        <p-tabView>
+            <p-tabPanel header="Fund Managaers">
+                <div>
+                    <li class="market-list list-border ">
+                        <span class='span-default details'>Latest Date</span>
+                        <span class='span-default details'>Created Date</span>
+                        <span class='span-default details'>Price</span>
+                        <span class='span-default details'>Change Rate</span>
+                        <span class='option option-th'>OPTION</span>
+                    </li>
+                    <li *ngFor="let item of currentData ; let i = index" class="market-list market-list-line" >
+                        <div class="li-line">
+                            <span class='span-default details'>{{item.latestDate}}</span>
+                            <span class='span-default details'>{{item.createDate}}</span>
+                            <span class='span-default details'>{{item.price}}</span>
+                            <span class='span-default details font-color-green' [ngClass]="{'font-color-red':item.changeRate < 0 }">{{item.changeRate}}</span>
+                            <span class="option">
+                                <button pButton type="button"
+                                                label='details' 
+                                                class="ui-button-raised ui-button-rounded"
+                                                (click)='toggle(i)'>
+                                </button>
+                                <button pButton type="button"
+                                                label='delete' 
+                                                class="ui-button-raised ui-button-rounded delete"
+                                                (click)='delete(i)'>
+                                </button>
+                                <button pButton type="button"
+                                                label='update' 
+                                                class="ui-button-raised ui-button-rounded update"
+                                                (click)='update(i)'>
+                                </button>
+                            </span>
+                            <div *ngIf='item.isShow' ng-transclude class="details-div market-list">
+                                <li class="market-list list-border content-list">
+                                    <span class='span-default create-time'>CREATE TIME</span>
+                                    <span class='span-default port-name'>Security NAME</span>
+                                    <span class='span-default create-time'>RATE</span>
+                                    <span class='span-default create-time'>CHART</span>
+                                </li>
+                                <li *ngFor="let con of item.content; let c = index" class="content-list">
+                                    <span class='span-default create-time'>{{con.create}}</span>
+                                    <span class='span-default create-time'>{{con.security_name}}</span>
+                                    <span class='span-default create-time'>{{con.rate}}</span>
+                                    <span class='span-default create-time'>
+                                        <button pButton type="button"  label="{{con.details}}" (click)='chartShow()' class="span-default"></button>
+                                    </span>
+                                </li>
+                            </div>
+                        </div>
+
+                    </li>
+                </div>
+                <div class="page">
+                    <p-paginator [rows]="10" [totalRecords]="100" (onPageChange)='paginate($event)'></p-paginator>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Add">
+                <app-add-user></app-add-user>
+            </p-tabPanel>    
+        </p-tabView>
+    </div>
+</div>

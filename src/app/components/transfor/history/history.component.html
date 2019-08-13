@@ -1,0 +1,39 @@
+<div class="div-container-90">
+    <div class="panel-header">
+            <div class="ui-g-1"> <h3>Date</h3></div>
+            <div class="ui-g-1"><h3>Asker</h3></div>
+            <div class="ui-g-2"><h3>transfor start date</h3></div>
+            <div class="ui-g-2"><h3>transfor end date</h3> </div>
+            <div class="ui-g-4"><h3>description</h3> </div>
+            <div class="ui-g-2"><h3>Status</h3></div>
+
+        </div>
+</div>
+
+<div class="header-line">
+
+</div>
+
+
+<div class="div-container-90" *ngFor="let item of currentData;let i=index;">
+
+
+
+<div class="sub-child">
+
+        <div class="ui-g-1"> <h3>{{item.requestDate}}</h3></div>
+        <div class="ui-g-1"><h3>{{item.Asker}}</h3></div>
+        <div class="ui-g-2"><h3>{{item.startDate}}</h3></div>
+        <div class="ui-g-2"><h3>{{item.endDate}}</h3> </div>
+        <div class="ui-g-4"><h3>{{item.description}}</h3> </div>
+        <div class="ui-g-2">
+            <h3 *ngIf="item.status=='Accepted'" style="color: green;">Accepted</h3>
+            <h3 *ngIf="item.status=='Rejected'" style="color: red;">Rejected</h3>
+        </div>
+
+</div>
+
+<div class="clear-div"></div>
+</div>
+
+<p-paginator [rows]="10" [totalRecords]="100" (onPageChange)="paginate($event)" ></p-paginator>

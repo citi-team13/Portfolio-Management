@@ -15,6 +15,7 @@ import {UpdateComponent} from '../../components/market/update/update.component';
 })
 export class MarketComponent implements OnInit {
   list: Array<any>;
+
   currentPage:number=0;
   perPageNum :number= 8;
   currentData:Array<any>;
@@ -34,6 +35,7 @@ export class MarketComponent implements OnInit {
     });
     
   }
+
   toggle(index){
     this.currentData[index].isShow = !this.currentData[index].isShow;
     console.log('change!',this.currentData[index].content[0]);
@@ -56,12 +58,9 @@ export class MarketComponent implements OnInit {
       header:'chart',
       width:'60%'
     });
-
   }
   pageChange(event){
-   //console.log('event page',event.page)
     this.currentPage = event.page;
-
     console.log(this.currentPage)
     if(this.currentPage*this.perPageNum>(this.list.length-1)){
       //重新请求数据

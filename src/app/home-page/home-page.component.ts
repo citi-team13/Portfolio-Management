@@ -59,6 +59,7 @@ export class HomePageComponent implements OnInit {
         label:'New Fund',
         command:()=>this.toCreateFund()
  
+
       },
       {
         label:'Security Market',

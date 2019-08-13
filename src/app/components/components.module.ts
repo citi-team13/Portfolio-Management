@@ -17,7 +17,9 @@ import { SecurityMarketComponent } from './security-market/security-market.compo
 
 
 
+
 @NgModule({
+
   declarations: [LoginComponent, MarketComponent, UpdatePriceComponent, SecurityComponent, TransforComponent, FundComponent, CreateFundComponent, RequestsComponent, HistoryComponent, AddUserComponent,FundListComponent, SecurityMarketComponent],
   imports: [
     CommonModule,

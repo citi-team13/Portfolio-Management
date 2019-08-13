@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -37,4 +38,3 @@ export class SecurityService {
     return this.http.get(this.url)
   }
 }
-

@@ -11,6 +11,7 @@ import {FundComponent} from './components/fund/fund.component';
 import {CreateFundComponent} from './components/create-fund/create-fund.component';
 import {SecurityMarketComponent} from './components/security-market/security-market.component'
 
+
 const routes: Routes = [
   {path:"",redirectTo:"home",pathMatch:'full'},
   {path:"default",component:DefaultPageComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
     {path:'CreateFund',component:CreateFundComponent},
 
     {path:'SecurityMarket',component:SecurityMarketComponent}
+
 
 ]
 

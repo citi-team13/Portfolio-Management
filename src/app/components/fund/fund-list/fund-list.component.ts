@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {SecurityService} from "../../../service/security.service";
 import {DialogService} from 'primeng/api';
 import {DynamicDialogRef} from 'primeng/api';
@@ -21,6 +22,7 @@ export class FundListComponent implements OnInit {
     this.setData();
    }
 
+
   ngOnInit() {
   }
 
@@ -32,6 +34,7 @@ export class FundListComponent implements OnInit {
   rejectRequest(i:number){
     console.log("reject",i);
   }
+
 
   setData(){
     this.service.getFundList().subscribe(data=>{
@@ -72,7 +75,4 @@ export class FundListComponent implements OnInit {
     }
   }
 
-  
-
-  
 }

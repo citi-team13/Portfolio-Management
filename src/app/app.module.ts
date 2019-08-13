@@ -40,7 +40,9 @@ import {AddUserComponent} from './components/add-user/add-user.component';
 import {PasswordModule} from 'primeng/password';
 
 import {UserService2Service} from './service/user-service2.service';
-import {FundListComponent} from '../app/components/fund/fund-list/fund-list.component';
+import {UpdateComponent} from "./components/market/update/update.component";
+import {FundChartComponent} from "./components/market/fund-chart/fund-chart.component";
+import {FundListComponent} from './components/fund/fund-list/fund-list.component';
 
 
 @NgModule({
@@ -62,8 +64,12 @@ import {FundListComponent} from '../app/components/fund/fund-list/fund-list.comp
     RequestsComponent,
     HistoryComponent,
     AddUserComponent,
+    UpdateComponent,
+    FundChartComponent,
     FundListComponent
+    
   ],
+  entryComponents:[UpdateComponent,FundChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -79,7 +85,7 @@ import {FundListComponent} from '../app/components/fund/fund-list/fund-list.comp
     DropdownModule,
     AutoCompleteModule,
     PaginatorModule,
-    PasswordModule
+    PasswordModule,
   ],
   providers: [UserService,SecurityService,PortfolioService,UserService2Service],
   bootstrap: [AppComponent]

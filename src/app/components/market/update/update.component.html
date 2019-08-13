@@ -1,0 +1,30 @@
+<div class="ui-inputgroup login-input-group">
+    <span class="ui-inputgroup-addon update-wrapper">
+       <div class="update-div">
+           <span class="update-span">User Type</span>
+           <p-dropdown [options]="userTypes" [(ngModel)]="selectedType" ></p-dropdown>
+       </div>
+       <div class="update-div">
+            <div class="update-span">Name</div>
+            <input type="text" pInputText class="update-input" [(ngModel)]="name">
+       </div>
+       <div class="update-div">
+            <span class="update-span">Email Address</span>
+            <input type="text" pInputText class="update-input" [(ngModel)]="email">
+        </div>
+        <div class="update-div">
+            <span class="update-span">Phone Number</span>
+            <input type="text" pInputText class="update-input" [(ngModel)]="phone">
+       </div>
+       <div class="update-div">
+            <span class="update-span">Password</span>
+            <input type="text" pInputText class="update-input" [(ngModel)]="pwd" type="password" >
+            
+       </div>
+       <div>
+           <button pButton label='Confirm' (click)='confirm()'></button>
+       </div>
+    </span>
+    
+
+</div>

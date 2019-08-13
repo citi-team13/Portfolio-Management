@@ -1,23 +1,26 @@
-import { Component, OnInit,Injectable,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit,Injectable } from '@angular/core';
 import {SecurityService} from "../../service/security.service";
-import {DynamicDialogRef , DynamicDialogConfig , DialogService} from 'primeng/api';
+import {DialogService} from 'primeng/api';
+import {DynamicDialogRef} from 'primeng/api';
+import {DynamicDialogConfig} from 'primeng/api';
 import {FundChartComponent} from '../../components/market/fund-chart/fund-chart.component';
+import {UpdateComponent} from '../../components/market/update/update.component';
 
 @Component({
   selector: 'app-market',
   templateUrl: './market.component.html',
   styleUrls: ['./market.component.scss'],
-  providers:[DialogService],
-  encapsulation:ViewEncapsulation.None
+  providers:[DialogService]  
 
 })
 export class MarketComponent implements OnInit {
   url:String;
-  list: object;
+  list: Array<any>;
   list_2: object;
+  currentPage:number=0;
+  perPageNum :number= 8;
+  currentData:Array<any>;
   
-  //private messageservice:MessageService
-     
   constructor(private service:SecurityService, public dialogService: DialogService) {
     
     this.setData();
@@ -26,46 +29,32 @@ export class MarketComponent implements OnInit {
   ngOnInit() {
   }
   setData(){
-    
-    this.list = [
-      { name:'mike',
-        details:'blabla',
-        content:'……………………………………………………',
-        isShow:false
-      },{
-        name:'lily',
-        details:'blabla',
-        content:'2222222',
-        isShow:false
-      },{
-        name:'lily',
-        details:'blabla',
-        content:'3333333',
-        isShow:false
-      },{
-        name:'lily',
-        details:'blabla',
-        content:'444444444',
-        isShow:false
-      }]
-      
     this.service.getMarket().subscribe(data=>{
       this.list_2=data;
-      console.log(this.list_2);
+      this.list=JSON.parse(JSON.stringify(data)); 
+      //this.currentData = this.list;
+      
+      this.currentData = this.list.slice(0,this.perPageNum)  
     });
+    
+  }
+  changeDataType(){
     
   }
 
   toggle(index){
-    this.list_2[index].isShow = !this.list_2[index].isShow;
-    console.log('change!',this.list_2[index].content[0]);
+    this.currentData[index].isShow = !this.currentData[index].isShow;
+    console.log('change!',this.currentData[index].content[0]);
   }
   delete(index){
     //this.messageservice.add({summary:'Success', detail:'Data Saved'});
     console.log('delete'+(index+1))
   }
-  update(index){
-    console.log('update'+(index+1))
+  update(){
+    const ref = this.dialogService.open(UpdateComponent,{
+      header:'update',
+      width:'80%'
+    })
   }
   submit(){
     console.log('submit')
@@ -76,5 +65,17 @@ export class MarketComponent implements OnInit {
       width:'60%'
     });
 
+  }
+  pageChange(event){
+    console.log('event page',event.page)
+    this.currentPage = event.page;
+
+    console.log(this.currentPage)
+    if(this.currentPage*this.perPageNum>(this.list.length-1)){
+      //重新请求数据
+    }
+    else{
+      this.currentData = this.list.slice(this.currentPage*this.perPageNum,Math.min(this.currentPage*this.perPageNum+this.perPageNum,this.list.length-1));
+    }
   }
 }

@@ -1,4 +1,15 @@
+
+
+
 <div class="div-container-90">
+
+
+                                <div class="ui-inputgroup">
+                                    <button pButton type="button" label="Search"></button>
+                                    <input type="text" pInputText placeholder="Keyword">         
+                                </div>
+                         
+
         <div class="panel-header">
                 <div class="ui-g-2"> <h3>Latest Date</h3></div>
                 <div class="ui-g-2"><h3>Created Date</h3> </div>
@@ -27,9 +38,12 @@
             <div class="ui-g-2" *ngIf="item.changeRate==0" style="color: #2f2f2f;" >{{item.changeRate}}% </div>
             <div class="ui-g-2" *ngIf="item.changeRate>0" style="color: green;" >{{item.changeRate}}% </div>
             <div class="ui-g-4">
-                <button pButton type="button" (click)="acceptRequest(i)" label="Accept" class="ui-button-raised ui-button-success" style="margin-right:1rem;"></button>
+                <button pButton type="button" (click)="acceptRequest(i)" label="Update" class="ui-button-raised ui-button-success" style="margin-right:1rem;"></button>
     
-                <button pButton type="button" (click)="rejectRequest(i)" label="Reject" class="ui-button-raised ui-button-danger"></button>
+                <button pButton type="button" (click)="rejectRequest(i)" label="Details" class="ui-button-raised ui-button-danger" style="margin-right:1rem;"></button>
+
+                <button pButton type="button" (click)="acceptRequest(i)" label="Delete" class="ui-button-raised ui-button-success" style="margin-right:1rem;"></button>
+    
             </div>
     
     </div>

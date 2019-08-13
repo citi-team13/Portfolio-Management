@@ -43,7 +43,7 @@ import {UserService2Service} from './service/user-service2.service';
 import {UpdateComponent} from "./components/market/update/update.component";
 import {FundChartComponent} from "./components/market/fund-chart/fund-chart.component";
 import {FundListComponent} from './components/fund/fund-list/fund-list.component';
-
+import {SecurityMarketComponent} from './components/security-market/security-market.component'
 
 
 @NgModule({
@@ -67,10 +67,11 @@ import {FundListComponent} from './components/fund/fund-list/fund-list.component
     AddUserComponent,
     UpdateComponent,
     FundChartComponent,
-    FundListComponent
+    FundListComponent,
+    SecurityMarketComponent
     
   ],
-  entryComponents:[UpdateComponent,FundChartComponent],
+  entryComponents:[UpdateComponent,FundChartComponent,SecurityMarketComponent],
 
   imports: [
     BrowserModule,
@@ -88,7 +89,6 @@ import {FundListComponent} from './components/fund/fund-list/fund-list.component
     AutoCompleteModule,
     PaginatorModule,
     PasswordModule,
-
   ],
   providers: [UserService,SecurityService,PortfolioService,UserService2Service],
   bootstrap: [AppComponent]

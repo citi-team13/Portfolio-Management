@@ -1,0 +1,33 @@
+{
+    "securityName":"FaceBook",
+"data":
+[
+    {"date":"2011-02-03","price":2.5,"changeRate":0.01},
+    {"date":"2011-02-04","price":2.6,"changeRate":0.02},
+    {"date":"2011-02-05","price":2.65,"changeRate":0.03},
+    {"date":"2011-02-06","price":2.68,"changeRate":0.01},
+    {"date":"2011-02-07","price":2.69,"changeRate":0.01},
+    {"date":"2011-02-08","price":2.70,"changeRate":-0.01},
+    {"date":"2011-02-09","price":2.72,"changeRate":0.01},
+    {"date":"2011-02-10","price":2.73,"changeRate":0.01},
+    {"date":"2011-02-11","price":2.60,"changeRate":-0.01},
+    {"date":"2012-02-03","price":2.78,"changeRate":0.01},
+    {"date":"2012-02-03","price":2.79,"changeRate":0.01},
+    {"date":"2012-02-03","price":2.80,"changeRate":0.01},
+    {"date":"2012-02-03","price":2.85,"changeRate":0.01},
+    {"date":"2012-02-03","price":2.75,"changeRate":-0.03},
+    {"date":"2012-02-03","price":2.90,"changeRate":0.01},
+    {"date":"2013-02-03","price":2.92,"changeRate":0.01},
+    {"date":"2013-02-03","price":2.93,"changeRate":0.01},
+    {"date":"2013-02-03","price":2.95,"changeRate":0.01},
+    {"date":"2013-02-03","price":2.98,"changeRate":0.01},
+    {"date":"2013-02-03","price":3.02,"changeRate":0.01},
+    {"date":"2013-02-03","price":2.8,"changeRate":-0.05},
+    {"date":"2014-02-03","price":2.92,"changeRate":0.01},
+    {"date":"2014-02-03","price":2.94,"changeRate":0.01},
+    {"date":"2014-02-03","price":2.72,"changeRate":0.01},
+    {"date":"2014-02-03","price":2.80,"changeRate":0.01}
+
+]
+
+}

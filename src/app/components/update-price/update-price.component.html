@@ -1,0 +1,35 @@
+
+<div class="div-container-90">
+
+
+
+        <p-tabView>
+    
+                <p-tabPanel header="Update Price">
+    
+                       <span><h4>*Select security Type</h4></span>
+                        <p-dropdown [options]="security1" [(ngModel)]="selectedItem" class="fix-width-2"></p-dropdown>
+    
+                        <div style="margin-top: 2rem;"></div>
+    
+                        <span><h4>*Search By Name </h4></span> 
+                        <p-autoComplete [(ngModel)]="SecurityName"  class="fix-width-2" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)" field="name" [size]="30" placeholder="Security Name" [minLength]="1"></p-autoComplete>
+                        
+                        
+                        
+                        <div style="margin-top: 2rem;"></div>
+    
+                        <span><h4>*Input Price Today</h4></span>
+                        <input pInputText type="text" [pKeyFilter]="noSpecial" [(ngModel)]="SecurityPrice" class="fix-width-2"  placeholder="security price" >  
+        
+                        <div style="margin-top: 2rem;"></div>
+                        <button pButton label="Update" (click)="updateSecurity()" class="fix-width-2"></button>
+    
+                        <div style="margin-top: 2rem;"></div>
+    
+                </p-tabPanel>
+    
+        </p-tabView>
+    
+    </div>
+    

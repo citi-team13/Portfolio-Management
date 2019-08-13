@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {DynamicDialogRef , DynamicDialogConfig , DialogService} from 'primeng/api';
 import {LoginComponent} from '../components/login/login.component';
 import {UserService2Service} from '../service/user-service2.service';
+import {SecurityMarketComponent} from '../components/security-market/security-market.component'
 
 @Component({
   selector: 'app-home-page',
@@ -58,6 +59,10 @@ export class HomePageComponent implements OnInit {
         label:'New Fund',
         command:()=>this.toCreateFund()
  
+      },
+      {
+        label:'Security Market',
+        command:()=>this.toSecMarket()
       }
     ]
   ]
@@ -166,6 +171,9 @@ export class HomePageComponent implements OnInit {
     this.router.navigate(['home/CreateFund']);
   }
 
+  toSecMarket(){
+    this.router.navigate(['home/SecurityMarket'])
+  }
 
 
 }

@@ -1,17 +1,15 @@
 package com.citi.portfolio.model;
 
-import java.math.BigDecimal;
-
 public class Portfolio {
     private String portfolioId;
 
     private String portfolioName;
 
-    private String ownerId;
+    private String managerId;
 
     private String createDate;
 
-    private BigDecimal changeRate;
+    private Double portfolioChangeRate;
 
     public String getPortfolioId() {
         return portfolioId;
@@ -29,12 +27,12 @@ public class Portfolio {
         this.portfolioName = portfolioName == null ? null : portfolioName.trim();
     }
 
-    public String getOwnerId() {
-        return ownerId;
+    public String getManagerId() {
+        return managerId;
     }
 
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId == null ? null : ownerId.trim();
+    public void setManagerId(String managerId) {
+        this.managerId = managerId == null ? null : managerId.trim();
     }
 
     public String getCreateDate() {
@@ -45,11 +43,11 @@ public class Portfolio {
         this.createDate = createDate == null ? null : createDate.trim();
     }
 
-    public BigDecimal getChangeRate() {
-        return changeRate;
+    public Double getPortfolioChangeRate() {
+        return portfolioChangeRate;
     }
 
-    public void setChangeRate(BigDecimal changeRate) {
-        this.changeRate = changeRate;
+    public void setPortfolioChangeRate(Double portfolioChangeRate) {
+        this.portfolioChangeRate = portfolioChangeRate;
     }
 }

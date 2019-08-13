@@ -22,8 +22,6 @@ public interface SecurityMapper {
 
     Security selectByPrimaryKey(String securityId);
 
-    Security selectBySecurityName(String securityId);
-
     int updateByExampleSelective(@Param("record") Security record, @Param("example") SecurityExample example);
 
     int updateByExample(@Param("record") Security record, @Param("example") SecurityExample example);
@@ -32,5 +30,7 @@ public interface SecurityMapper {
 
     int updateByPrimaryKey(Security record);
 
-    List<Map<String,Object>> readSecurityList(Map<String,Object> paramMap);
+    Security selectBySecurityName(String securityName);
+
+    List<Map<String, Object>> readSecurityList(Map<String, Object> paramMap);
 }

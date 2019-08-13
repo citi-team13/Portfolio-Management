@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.citi.portfolio.mapper.TransferMapper" >
   <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Transfer" >
-    <id column="transferId" property="transferId" jdbcType="CHAR" />
-    <result column="requestDate" property="requestDate" jdbcType="CHAR" />
-    <result column="startDate" property="startDate" jdbcType="CHAR" />
-    <result column="endDate" property="endDate" jdbcType="CHAR" />
-    <result column="portfolioId" property="portfolioId" jdbcType="CHAR" />
-    <result column="requesterId" property="requesterId" jdbcType="CHAR" />
-    <result column="objectId" property="objectId" jdbcType="CHAR" />
+    <id column="transfer_id" property="transferId" jdbcType="CHAR" />
+    <result column="request_date" property="requestDate" jdbcType="CHAR" />
+    <result column="start_date" property="startDate" jdbcType="CHAR" />
+    <result column="end_date" property="endDate" jdbcType="CHAR" />
+    <result column="requester_id" property="requesterId" jdbcType="CHAR" />
+    <result column="receiver_id" property="receiverId" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    transferId, requestDate, startDate, endDate, portfolioId, requesterId, objectId
+    transfer_id, request_date, start_date, end_date, requester_id, receiver_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.citi.portfolio.model.TransferExample" >
     select
@@ -89,11 +88,11 @@
     select 
     <include refid="Base_Column_List" />
     from transfer
-    where transferId = #{transferId,jdbcType=CHAR}
+    where transfer_id = #{transferId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from transfer
-    where transferId = #{transferId,jdbcType=CHAR}
+    where transfer_id = #{transferId,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.citi.portfolio.model.TransferExample" >
     delete from transfer
@@ -102,36 +101,33 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Transfer" >
-    insert into transfer (transferId, requestDate, startDate, 
-      endDate, portfolioId, requesterId, 
-      objectId)
+    insert into transfer (transfer_id, request_date, start_date, 
+      end_date, requester_id, receiver_id
+      )
     values (#{transferId,jdbcType=CHAR}, #{requestDate,jdbcType=CHAR}, #{startDate,jdbcType=CHAR}, 
-      #{endDate,jdbcType=CHAR}, #{portfolioId,jdbcType=CHAR}, #{requesterId,jdbcType=CHAR}, 
-      #{objectId,jdbcType=CHAR})
+      #{endDate,jdbcType=CHAR}, #{requesterId,jdbcType=CHAR}, #{receiverId,jdbcType=CHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.citi.portfolio.model.Transfer" >
     insert into transfer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="transferId != null" >
-        transferId,
+        transfer_id,
       </if>
       <if test="requestDate != null" >
-        requestDate,
+        request_date,
       </if>
       <if test="startDate != null" >
-        startDate,
+        start_date,
       </if>
       <if test="endDate != null" >
-        endDate,
-      </if>
-      <if test="portfolioId != null" >
-        portfolioId,
+        end_date,
       </if>
       <if test="requesterId != null" >
-        requesterId,
+        requester_id,
       </if>
-      <if test="objectId != null" >
-        objectId,
+      <if test="receiverId != null" >
+        receiver_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -147,14 +143,11 @@
       <if test="endDate != null" >
         #{endDate,jdbcType=CHAR},
       </if>
-      <if test="portfolioId != null" >
-        #{portfolioId,jdbcType=CHAR},
-      </if>
       <if test="requesterId != null" >
         #{requesterId,jdbcType=CHAR},
       </if>
-      <if test="objectId != null" >
-        #{objectId,jdbcType=CHAR},
+      <if test="receiverId != null" >
+        #{receiverId,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -168,25 +161,22 @@
     update transfer
     <set >
       <if test="record.transferId != null" >
-        transferId = #{record.transferId,jdbcType=CHAR},
+        transfer_id = #{record.transferId,jdbcType=CHAR},
       </if>
       <if test="record.requestDate != null" >
-        requestDate = #{record.requestDate,jdbcType=CHAR},
+        request_date = #{record.requestDate,jdbcType=CHAR},
       </if>
       <if test="record.startDate != null" >
-        startDate = #{record.startDate,jdbcType=CHAR},
+        start_date = #{record.startDate,jdbcType=CHAR},
       </if>
       <if test="record.endDate != null" >
-        endDate = #{record.endDate,jdbcType=CHAR},
-      </if>
-      <if test="record.portfolioId != null" >
-        portfolioId = #{record.portfolioId,jdbcType=CHAR},
+        end_date = #{record.endDate,jdbcType=CHAR},
       </if>
       <if test="record.requesterId != null" >
-        requesterId = #{record.requesterId,jdbcType=CHAR},
+        requester_id = #{record.requesterId,jdbcType=CHAR},
       </if>
-      <if test="record.objectId != null" >
-        objectId = #{record.objectId,jdbcType=CHAR},
+      <if test="record.receiverId != null" >
+        receiver_id = #{record.receiverId,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -195,13 +185,12 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update transfer
-    set transferId = #{record.transferId,jdbcType=CHAR},
-      requestDate = #{record.requestDate,jdbcType=CHAR},
-      startDate = #{record.startDate,jdbcType=CHAR},
-      endDate = #{record.endDate,jdbcType=CHAR},
-      portfolioId = #{record.portfolioId,jdbcType=CHAR},
-      requesterId = #{record.requesterId,jdbcType=CHAR},
-      objectId = #{record.objectId,jdbcType=CHAR}
+    set transfer_id = #{record.transferId,jdbcType=CHAR},
+      request_date = #{record.requestDate,jdbcType=CHAR},
+      start_date = #{record.startDate,jdbcType=CHAR},
+      end_date = #{record.endDate,jdbcType=CHAR},
+      requester_id = #{record.requesterId,jdbcType=CHAR},
+      receiver_id = #{record.receiverId,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,34 +199,30 @@
     update transfer
     <set >
       <if test="requestDate != null" >
-        requestDate = #{requestDate,jdbcType=CHAR},
+        request_date = #{requestDate,jdbcType=CHAR},
       </if>
       <if test="startDate != null" >
-        startDate = #{startDate,jdbcType=CHAR},
+        start_date = #{startDate,jdbcType=CHAR},
       </if>
       <if test="endDate != null" >
-        endDate = #{endDate,jdbcType=CHAR},
-      </if>
-      <if test="portfolioId != null" >
-        portfolioId = #{portfolioId,jdbcType=CHAR},
+        end_date = #{endDate,jdbcType=CHAR},
       </if>
       <if test="requesterId != null" >
-        requesterId = #{requesterId,jdbcType=CHAR},
+        requester_id = #{requesterId,jdbcType=CHAR},
       </if>
-      <if test="objectId != null" >
-        objectId = #{objectId,jdbcType=CHAR},
+      <if test="receiverId != null" >
+        receiver_id = #{receiverId,jdbcType=CHAR},
       </if>
     </set>
-    where transferId = #{transferId,jdbcType=CHAR}
+    where transfer_id = #{transferId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Transfer" >
     update transfer
-    set requestDate = #{requestDate,jdbcType=CHAR},
-      startDate = #{startDate,jdbcType=CHAR},
-      endDate = #{endDate,jdbcType=CHAR},
-      portfolioId = #{portfolioId,jdbcType=CHAR},
-      requesterId = #{requesterId,jdbcType=CHAR},
-      objectId = #{objectId,jdbcType=CHAR}
-    where transferId = #{transferId,jdbcType=CHAR}
+    set request_date = #{requestDate,jdbcType=CHAR},
+      start_date = #{startDate,jdbcType=CHAR},
+      end_date = #{endDate,jdbcType=CHAR},
+      requester_id = #{requesterId,jdbcType=CHAR},
+      receiver_id = #{receiverId,jdbcType=CHAR}
+    where transfer_id = #{transferId,jdbcType=CHAR}
   </update>
 </mapper>

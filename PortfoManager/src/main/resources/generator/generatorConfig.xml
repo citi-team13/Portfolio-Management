@@ -50,11 +50,21 @@
 <!--        <table tableName="userclassify"><property name="useActualColumnNames" value="true"/></table>-->
 <!--        <table tableName="Securityclassify"><property name="useActualColumnNames" value="true"/></table>-->
 <!--        <table tableName="security"><property name="useActualColumnNames" value="true"/></table>-->
-        <table tableName="price"><property name="useActualColumnNames" value="true"/></table>
-        <table tableName="portfolio"><property name="useActualColumnNames" value="true"/></table>
-        <table tableName="portfolioItem"><property name="useActualColumnNames" value="true"/></table>
-        <table tableName="pos"><property name="useActualColumnNames" value="true"/></table>
-        <table tableName="transfer"><property name="useActualColumnNames" value="true"/></table>
+<!--        <table tableName="price"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="portfolio"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="portfolioItem"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="pos"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="transfer"><property name="useActualColumnNames" value="true"/></table>-->
+
+        <table tableName="user"></table>
+        <table tableName="user_classify"></table>
+        <table tableName="security_classify"></table>
+        <table tableName="security"></table>
+        <table tableName="price"></table>
+        <table tableName="portfolio"></table>
+        <table tableName="portfolio_item"></table>
+        <table tableName="position"></table>
+        <table tableName="transfer"></table>
 
     </context>
 </generatorConfiguration>

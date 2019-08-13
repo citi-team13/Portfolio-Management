@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.citi.portfolio.mapper.PriceMapper" >
   <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Price" >
-    <id column="securityId" property="securityId" jdbcType="CHAR" />
-    <id column="Date" property="date" jdbcType="CHAR" />
-    <result column="Price" property="price" jdbcType="DECIMAL" />
-    <result column="changeRate" property="changeRate" jdbcType="DECIMAL" />
+    <id column="security_id" property="securityId" jdbcType="CHAR" />
+    <id column="value_date" property="valueDate" jdbcType="CHAR" />
+    <result column="value" property="value" jdbcType="DECIMAL" />
+    <result column="price_change_rate" property="priceChangeRate" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    securityId, Date, Price, changeRate
+    security_id, value_date, value, price_change_rate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.citi.portfolio.model.PriceExample" >
     select
@@ -86,13 +86,13 @@
     select 
     <include refid="Base_Column_List" />
     from price
-    where securityId = #{securityId,jdbcType=CHAR}
-      and Date = #{date,jdbcType=CHAR}
+    where security_id = #{securityId,jdbcType=CHAR}
+      and value_date = #{valueDate,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from price
-    where securityId = #{securityId,jdbcType=CHAR}
-      and Date = #{date,jdbcType=CHAR}
+    where security_id = #{securityId,jdbcType=CHAR}
+      and value_date = #{valueDate,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.citi.portfolio.model.PriceExample" >
     delete from price
@@ -101,39 +101,39 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Price" >
-    insert into price (securityId, Date, Price, 
-      changeRate)
-    values (#{securityId,jdbcType=CHAR}, #{date,jdbcType=CHAR}, #{price,jdbcType=DECIMAL}, 
-      #{changeRate,jdbcType=DECIMAL})
+    insert into price (security_id, value_date, value, 
+      price_change_rate)
+    values (#{securityId,jdbcType=CHAR}, #{valueDate,jdbcType=CHAR}, #{value,jdbcType=DECIMAL}, 
+      #{priceChangeRate,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.citi.portfolio.model.Price" >
     insert into price
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="securityId != null" >
-        securityId,
+        security_id,
       </if>
-      <if test="date != null" >
-        Date,
+      <if test="valueDate != null" >
+        value_date,
       </if>
-      <if test="price != null" >
-        Price,
+      <if test="value != null" >
+        value,
       </if>
-      <if test="changeRate != null" >
-        changeRate,
+      <if test="priceChangeRate != null" >
+        price_change_rate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="securityId != null" >
         #{securityId,jdbcType=CHAR},
       </if>
-      <if test="date != null" >
-        #{date,jdbcType=CHAR},
+      <if test="valueDate != null" >
+        #{valueDate,jdbcType=CHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
+      <if test="value != null" >
+        #{value,jdbcType=DECIMAL},
       </if>
-      <if test="changeRate != null" >
-        #{changeRate,jdbcType=DECIMAL},
+      <if test="priceChangeRate != null" >
+        #{priceChangeRate,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -147,16 +147,16 @@
     update price
     <set >
       <if test="record.securityId != null" >
-        securityId = #{record.securityId,jdbcType=CHAR},
+        security_id = #{record.securityId,jdbcType=CHAR},
       </if>
-      <if test="record.date != null" >
-        Date = #{record.date,jdbcType=CHAR},
+      <if test="record.valueDate != null" >
+        value_date = #{record.valueDate,jdbcType=CHAR},
       </if>
-      <if test="record.price != null" >
-        Price = #{record.price,jdbcType=DECIMAL},
+      <if test="record.value != null" >
+        value = #{record.value,jdbcType=DECIMAL},
       </if>
-      <if test="record.changeRate != null" >
-        changeRate = #{record.changeRate,jdbcType=DECIMAL},
+      <if test="record.priceChangeRate != null" >
+        price_change_rate = #{record.priceChangeRate,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -165,10 +165,10 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update price
-    set securityId = #{record.securityId,jdbcType=CHAR},
-      Date = #{record.date,jdbcType=CHAR},
-      Price = #{record.price,jdbcType=DECIMAL},
-      changeRate = #{record.changeRate,jdbcType=DECIMAL}
+    set security_id = #{record.securityId,jdbcType=CHAR},
+      value_date = #{record.valueDate,jdbcType=CHAR},
+      value = #{record.value,jdbcType=DECIMAL},
+      price_change_rate = #{record.priceChangeRate,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -176,21 +176,21 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.model.Price" >
     update price
     <set >
-      <if test="price != null" >
-        Price = #{price,jdbcType=DECIMAL},
+      <if test="value != null" >
+        value = #{value,jdbcType=DECIMAL},
       </if>
-      <if test="changeRate != null" >
-        changeRate = #{changeRate,jdbcType=DECIMAL},
+      <if test="priceChangeRate != null" >
+        price_change_rate = #{priceChangeRate,jdbcType=DOUBLE},
       </if>
     </set>
-    where securityId = #{securityId,jdbcType=CHAR}
-      and Date = #{date,jdbcType=CHAR}
+    where security_id = #{securityId,jdbcType=CHAR}
+      and value_date = #{valueDate,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Price" >
     update price
-    set Price = #{price,jdbcType=DECIMAL},
-      changeRate = #{changeRate,jdbcType=DECIMAL}
-    where securityId = #{securityId,jdbcType=CHAR}
-      and Date = #{date,jdbcType=CHAR}
+    set value = #{value,jdbcType=DECIMAL},
+      price_change_rate = #{priceChangeRate,jdbcType=DOUBLE}
+    where security_id = #{securityId,jdbcType=CHAR}
+      and value_date = #{valueDate,jdbcType=CHAR}
   </update>
 </mapper>

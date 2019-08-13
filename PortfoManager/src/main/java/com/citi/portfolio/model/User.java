@@ -13,6 +13,8 @@ public class User {
 
     private String email;
 
+
+
     private static final long serialVersionUID = 1L;
 
     private static int ID_length  = 20;
@@ -65,10 +67,13 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public static int getID_length() {
         return ID_length;
     }
-
 
     @Override
     public boolean equals(Object that) {
@@ -117,5 +122,4 @@ public class User {
         sb.append("]");
         return sb.toString();
     }
-
 }

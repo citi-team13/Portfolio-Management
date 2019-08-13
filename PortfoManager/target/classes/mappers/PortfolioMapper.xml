@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.citi.portfolio.mapper.PortfolioMapper" >
   <resultMap id="BaseResultMap" type="com.citi.portfolio.model.Portfolio" >
-    <id column="portfolioId" property="portfolioId" jdbcType="CHAR" />
-    <result column="portfolioName" property="portfolioName" jdbcType="CHAR" />
-    <result column="ownerId" property="ownerId" jdbcType="CHAR" />
-    <result column="changeRate" property="changeRate" jdbcType="DECIMAL" />
+    <id column="portfolio_id" property="portfolioId" jdbcType="CHAR" />
+    <result column="portfolio_name" property="portfolioName" jdbcType="CHAR" />
+    <result column="manager_id" property="managerId" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="CHAR" />
+    <result column="portfolio_change_rate" property="portfolioChangeRate" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    portfolioId, portfolioName, ownerId, changeRate
+    portfolio_id, portfolio_name, manager_id, create_date, portfolio_change_rate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.citi.portfolio.model.PortfolioExample" >
     select
@@ -86,11 +87,11 @@
     select 
     <include refid="Base_Column_List" />
     from portfolio
-    where portfolioId = #{portfolioId,jdbcType=CHAR}
+    where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from portfolio
-    where portfolioId = #{portfolioId,jdbcType=CHAR}
+    where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.citi.portfolio.model.PortfolioExample" >
     delete from portfolio
@@ -99,25 +100,28 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Portfolio" >
-    insert into portfolio (portfolioId, portfolioName, ownerId, 
-      changeRate)
-    values (#{portfolioId,jdbcType=CHAR}, #{portfolioName,jdbcType=CHAR}, #{ownerId,jdbcType=CHAR}, 
-      #{changeRate,jdbcType=DECIMAL})
+    insert into portfolio (portfolio_id, portfolio_name, manager_id, 
+      create_date, portfolio_change_rate)
+    values (#{portfolioId,jdbcType=CHAR}, #{portfolioName,jdbcType=CHAR}, #{managerId,jdbcType=CHAR}, 
+      #{createDate,jdbcType=CHAR}, #{portfolioChangeRate,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.citi.portfolio.model.Portfolio" >
     insert into portfolio
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="portfolioId != null" >
-        portfolioId,
+        portfolio_id,
       </if>
       <if test="portfolioName != null" >
-        portfolioName,
+        portfolio_name,
       </if>
-      <if test="ownerId != null" >
-        ownerId,
+      <if test="managerId != null" >
+        manager_id,
       </if>
-      <if test="changeRate != null" >
-        changeRate,
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="portfolioChangeRate != null" >
+        portfolio_change_rate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -127,11 +131,14 @@
       <if test="portfolioName != null" >
         #{portfolioName,jdbcType=CHAR},
       </if>
-      <if test="ownerId != null" >
-        #{ownerId,jdbcType=CHAR},
+      <if test="managerId != null" >
+        #{managerId,jdbcType=CHAR},
       </if>
-      <if test="changeRate != null" >
-        #{changeRate,jdbcType=DECIMAL},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="portfolioChangeRate != null" >
+        #{portfolioChangeRate,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -145,16 +152,19 @@
     update portfolio
     <set >
       <if test="record.portfolioId != null" >
-        portfolioId = #{record.portfolioId,jdbcType=CHAR},
+        portfolio_id = #{record.portfolioId,jdbcType=CHAR},
       </if>
       <if test="record.portfolioName != null" >
-        portfolioName = #{record.portfolioName,jdbcType=CHAR},
+        portfolio_name = #{record.portfolioName,jdbcType=CHAR},
       </if>
-      <if test="record.ownerId != null" >
-        ownerId = #{record.ownerId,jdbcType=CHAR},
+      <if test="record.managerId != null" >
+        manager_id = #{record.managerId,jdbcType=CHAR},
       </if>
-      <if test="record.changeRate != null" >
-        changeRate = #{record.changeRate,jdbcType=DECIMAL},
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=CHAR},
+      </if>
+      <if test="record.portfolioChangeRate != null" >
+        portfolio_change_rate = #{record.portfolioChangeRate,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -163,10 +173,11 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update portfolio
-    set portfolioId = #{record.portfolioId,jdbcType=CHAR},
-      portfolioName = #{record.portfolioName,jdbcType=CHAR},
-      ownerId = #{record.ownerId,jdbcType=CHAR},
-      changeRate = #{record.changeRate,jdbcType=DECIMAL}
+    set portfolio_id = #{record.portfolioId,jdbcType=CHAR},
+      portfolio_name = #{record.portfolioName,jdbcType=CHAR},
+      manager_id = #{record.managerId,jdbcType=CHAR},
+      create_date = #{record.createDate,jdbcType=CHAR},
+      portfolio_change_rate = #{record.portfolioChangeRate,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -175,22 +186,26 @@
     update portfolio
     <set >
       <if test="portfolioName != null" >
-        portfolioName = #{portfolioName,jdbcType=CHAR},
+        portfolio_name = #{portfolioName,jdbcType=CHAR},
       </if>
-      <if test="ownerId != null" >
-        ownerId = #{ownerId,jdbcType=CHAR},
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=CHAR},
       </if>
-      <if test="changeRate != null" >
-        changeRate = #{changeRate,jdbcType=DECIMAL},
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="portfolioChangeRate != null" >
+        portfolio_change_rate = #{portfolioChangeRate,jdbcType=DOUBLE},
       </if>
     </set>
-    where portfolioId = #{portfolioId,jdbcType=CHAR}
+    where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Portfolio" >
     update portfolio
-    set portfolioName = #{portfolioName,jdbcType=CHAR},
-      ownerId = #{ownerId,jdbcType=CHAR},
-      changeRate = #{changeRate,jdbcType=DECIMAL}
-    where portfolioId = #{portfolioId,jdbcType=CHAR}
+    set portfolio_name = #{portfolioName,jdbcType=CHAR},
+      manager_id = #{managerId,jdbcType=CHAR},
+      create_date = #{createDate,jdbcType=CHAR},
+      portfolio_change_rate = #{portfolioChangeRate,jdbcType=DOUBLE}
+    where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </update>
 </mapper>

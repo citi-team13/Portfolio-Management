@@ -9,9 +9,9 @@ public class Transfer {
 
     private String endDate;
 
-    private String requestId;
+    private String requesterId;
 
-    private String ownerId;
+    private String receiverId;
 
     public String getTransferId() {
         return transferId;
@@ -45,19 +45,19 @@ public class Transfer {
         this.endDate = endDate == null ? null : endDate.trim();
     }
 
-    public String getRequestId() {
-        return requestId;
+    public String getRequesterId() {
+        return requesterId;
     }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId == null ? null : requestId.trim();
+    public void setRequesterId(String requesterId) {
+        this.requesterId = requesterId == null ? null : requesterId.trim();
     }
 
-    public String getOwnerId() {
-        return ownerId;
+    public String getReceiverId() {
+        return receiverId;
     }
 
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId == null ? null : ownerId.trim();
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId == null ? null : receiverId.trim();
     }
 }

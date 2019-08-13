@@ -22,16 +22,16 @@ public class AdministratorController {
     @Autowired
     private SecurityService securityService;
 
-    @PostMapping("/fundmanager")
+    @PostMapping("/fundmanagers")
     @ResponseBody
-    public Result createFundUser(User user){
+    public Result createFundUser(@RequestBody User user){
         return administratorService.createAFundManager(user);
     }
 
     /**
      * 获取基金经理用户详情
      */
-    @GetMapping("/fundmanager")
+    @GetMapping("/fundmanager/{userId}")
     @ResponseBody
     public Result getFundUser(@PathVariable(value = "userId") String userId){
         return administratorService.getFundManager(userId);
@@ -59,7 +59,7 @@ public class AdministratorController {
     /**
      * 删除用户信息
      */
-    @DeleteMapping("/funduser")
+    @DeleteMapping("/funduser/{userId} ")
     @ResponseBody
     public Result deleteFundUser(String userId){
         return administratorService.deleteFundManager(userId);
@@ -97,7 +97,7 @@ public class AdministratorController {
     /**
      * 创建security
      */
-    @PostMapping("/security")
+    @PostMapping("/securities")
     @ResponseBody
     public Result createSecurity(Security securityInfo){
         return securityService.createSecurity(securityInfo);
@@ -115,13 +115,25 @@ public class AdministratorController {
     /**
      * 查询security list
      */
-    @GetMapping("/security")
+    @GetMapping("/securities")
     @ResponseBody
     public Result readSecurityList(@RequestParam(value = "search",required = false) String search,
                                    @RequestParam(value = "page",required = false) int page,
                                    @RequestParam(value = "securityType",required = false) String securityType){
 
         return securityService.readSecurityList(search,securityType,page);
+    }
+
+    @PostMapping("/security")
+    @ResponseBody
+    public Result updateSecurity(Security securityInfo){
+        return securityService.updateSecurity(securityInfo);
+    }
+
+    @DeleteMapping("/security/{security_id}")
+    @ResponseBody
+    public Result deleteSecurity(String security_id){
+        return administratorService.deleteFundManager(security_id);
     }
 
 

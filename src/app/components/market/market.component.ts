@@ -29,6 +29,7 @@ export class MarketComponent implements OnInit {
   ngOnInit() {
   }
   setData(){
+
     this.service.getMarket().subscribe(data=>{
       this.list_2=data;
       this.list=JSON.parse(JSON.stringify(data)); 

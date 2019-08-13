@@ -45,6 +45,7 @@ import {FundChartComponent} from "./components/market/fund-chart/fund-chart.comp
 import {FundListComponent} from './components/fund/fund-list/fund-list.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,7 @@ import {FundListComponent} from './components/fund/fund-list/fund-list.component
     
   ],
   entryComponents:[UpdateComponent,FundChartComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -86,6 +88,7 @@ import {FundListComponent} from './components/fund/fund-list/fund-list.component
     AutoCompleteModule,
     PaginatorModule,
     PasswordModule,
+
   ],
   providers: [UserService,SecurityService,PortfolioService,UserService2Service],
   bootstrap: [AppComponent]

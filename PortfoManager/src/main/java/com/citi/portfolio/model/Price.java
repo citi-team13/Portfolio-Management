@@ -1,11 +1,15 @@
 package com.citi.portfolio.model;
 
+import java.math.BigDecimal;
+
 public class Price {
     private String securityId;
 
-    private String date;
+    private String priceDate;
 
-    private Float price;
+    private BigDecimal price;
+
+    private Long changeRate;
 
     public String getSecurityId() {
         return securityId;
@@ -15,19 +19,27 @@ public class Price {
         this.securityId = securityId == null ? null : securityId.trim();
     }
 
-    public String getDate() {
-        return date;
+    public String getPriceDate() {
+        return priceDate;
     }
 
-    public void setDate(String date) {
-        this.date = date == null ? null : date.trim();
+    public void setPriceDate(String priceDate) {
+        this.priceDate = priceDate == null ? null : priceDate.trim();
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Long getChangeRate() {
+        return changeRate;
+    }
+
+    public void setChangeRate(Long changeRate) {
+        this.changeRate = changeRate;
     }
 }

@@ -11,7 +11,7 @@ public class Security implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static int ID_length  = 10;
+    private static int ID_length  = 20;
 
     public static int getID_length() {
         return ID_length;

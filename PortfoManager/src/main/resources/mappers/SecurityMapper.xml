@@ -140,7 +140,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <select id="readSecurityList" parameterType="java.util.Map" resultMap="java.util.HashMap">
+  <select id="readSecurityList" parameterType="java.util.Map" resultType="java.util.HashMap">
     select
     securityId, securityName, typeName
     from security s left join classify c on s.typeId = c.typeId

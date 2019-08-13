@@ -7,7 +7,7 @@
     <properties resource="generator/generator.properties"/>
     <!--<classPathEntry location="${mysqldb.classPath}" />-->
     <!-- 一个数据库一个context -->
-    <context id="Oracle" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <context id="Oracle" targetRuntime="MyBatis3" defaultModelType="flat">
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
@@ -46,13 +46,15 @@
 <!--            &lt;!&ndash;oracle 配置&ndash;&gt;-->
 <!--            &lt;!&ndash;<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>&ndash;&gt;-->
 <!--        </table>-->
-        <table tableName="user"><property name="useActualColumnNames" value="true"/></table>
-<!--        <table tableName="classify"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="user"><property name="useActualColumnNames" value="true"/></table>-->
+        <table tableName="userclassify"><property name="useActualColumnNames" value="true"/></table>
+        <table tableName="Securityclassify"><property name="useActualColumnNames" value="true"/></table>
 <!--        <table tableName="security"><property name="useActualColumnNames" value="true"/></table>-->
-<!--        <table tableName="price"><property name="useActualColumnNames" value="true"/></table>-->
-<!--        <table tableName="portfolio"><property name="useActualColumnNames" value="true"/></table>-->
-<!--        <table tableName="pos"><property name="useActualColumnNames" value="true"/></table>-->
-<!--        <table tableName="transfer"><property name="useActualColumnNames" value="true"/></table>-->
+        <table tableName="price"><property name="useActualColumnNames" value="true"/></table>
+        <table tableName="portfolio"><property name="useActualColumnNames" value="true"/></table>
+        <table tableName="portfolioItem"><property name="useActualColumnNames" value="true"/></table>
+        <table tableName="pos"><property name="useActualColumnNames" value="true"/></table>
+        <table tableName="transfer"><property name="useActualColumnNames" value="true"/></table>
 
     </context>
 </generatorConfiguration>

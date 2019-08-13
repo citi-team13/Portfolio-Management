@@ -47,10 +47,12 @@
 <!--            &lt;!&ndash;<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>&ndash;&gt;-->
 <!--        </table>-->
 <!--        <table tableName="user"><property name="useActualColumnNames" value="true"/></table>-->
-        <table tableName="classify"><property name="useActualColumnNames" value="true"/></table>
-        <table tableName="security"><property name="useActualColumnNames" value="true"/></table>
+<!--        <table tableName="userclassify"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="Securityclassify"><property name="useActualColumnNames" value="true"/></table>-->
+<!--        <table tableName="security"><property name="useActualColumnNames" value="true"/></table>-->
         <table tableName="price"><property name="useActualColumnNames" value="true"/></table>
         <table tableName="portfolio"><property name="useActualColumnNames" value="true"/></table>
+        <table tableName="portfolioItem"><property name="useActualColumnNames" value="true"/></table>
         <table tableName="pos"><property name="useActualColumnNames" value="true"/></table>
         <table tableName="transfer"><property name="useActualColumnNames" value="true"/></table>
 

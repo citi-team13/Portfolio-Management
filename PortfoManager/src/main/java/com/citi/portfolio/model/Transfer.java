@@ -1,21 +1,17 @@
 package com.citi.portfolio.model;
 
-import java.util.Date;
-
 public class Transfer {
     private String transferId;
 
-    private Date requestDate;
+    private String requestDate;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 
-    private String portfolioId;
+    private String requestId;
 
-    private String requesterId;
-
-    private String objectId;
+    private String ownerId;
 
     public String getTransferId() {
         return transferId;
@@ -25,51 +21,43 @@ public class Transfer {
         this.transferId = transferId == null ? null : transferId.trim();
     }
 
-    public Date getRequestDate() {
+    public String getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
-        this.requestDate = requestDate;
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate == null ? null : requestDate.trim();
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate == null ? null : startDate.trim();
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate == null ? null : endDate.trim();
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId == null ? null : portfolioId.trim();
+    public void setRequestId(String requestId) {
+        this.requestId = requestId == null ? null : requestId.trim();
     }
 
-    public String getRequesterId() {
-        return requesterId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setRequesterId(String requesterId) {
-        this.requesterId = requesterId == null ? null : requesterId.trim();
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId == null ? null : objectId.trim();
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId == null ? null : ownerId.trim();
     }
 }

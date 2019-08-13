@@ -46,7 +46,7 @@ public class UserController {
     @ResponseBody
     public Result logout(HttpSession session) {
         // 移除session
-        session.removeAttribute(WebSecurityConfig.SESSION_KEY);
+        session.invalidate();
         return Result.success("",200,"登出成功!");
     }
 

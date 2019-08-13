@@ -15,7 +15,7 @@ public class User {
 
     private static final long serialVersionUID = 1L;
 
-    private static int ID_length  = 8;
+    private static int ID_length  = 20;
 
     public String getUserId() {
         return userId;

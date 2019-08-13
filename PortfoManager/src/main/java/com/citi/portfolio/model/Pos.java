@@ -7,6 +7,8 @@ public class Pos {
 
     private String updateTime;
 
+    private String endTime;
+
     private Float position;
 
     public String getPortfolioId() {
@@ -31,6 +33,14 @@ public class Pos {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime == null ? null : updateTime.trim();
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime == null ? null : endTime.trim();
     }
 
     public Float getPosition() {

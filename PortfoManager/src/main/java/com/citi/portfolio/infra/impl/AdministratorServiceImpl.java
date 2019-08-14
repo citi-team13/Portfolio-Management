@@ -63,7 +63,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         if (Assert.isNULL(user)) {
             return Result.failure(402,"The Fund manager is not exist!");
         }
-        List<Map> portfolioDetail  = portfolioMapper.selectPortfolioDetail(userId, DateUtil.getToday());
+        List<Portfolio> portfolioDetail  = portfolioMapper.selectAllForCurrentUser(userId);
 //        List<Map> portfolioDetail  = portfolioMapper.selectPortfolioDetail(userId, "");
         if(Assert.isNULL(portfolioDetail)){
             return Result.failure(401,"This manager's portfolio information can not access now.");

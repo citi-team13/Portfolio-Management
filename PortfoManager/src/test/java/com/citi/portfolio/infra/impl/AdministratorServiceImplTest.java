@@ -27,7 +27,7 @@ public class AdministratorServiceImplTest {
 
     @Test
     public void getFundManagerDetail() {
-        System.out.println(administratorService.getFundManagerDetail("24"));
+        System.out.println(administratorService.getFundManagerDetail("33"));
     }
 
     @Test

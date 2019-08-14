@@ -32,12 +32,21 @@ public class AdministratorController {
     }
 
     /**
-     * 获取基金经理用户详情
+     * 获取基金经理用户基本信息
      */
     @GetMapping("/fundmanager/{userId}")
     @ResponseBody
     public Result getFundUser(@PathVariable(value = "userId") String userId){
         return administratorService.getFundManager(userId);
+    }
+
+    /**
+     * 获取基金经理用户详细信息
+     */
+    @GetMapping("/fundmanager/detail/{userId}")
+    @ResponseBody
+    public Result getFundUserDetail(@PathVariable(value = "userId") String userId){
+        return administratorService.getFundManagerDetail(userId);
     }
 
     /**

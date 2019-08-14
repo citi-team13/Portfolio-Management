@@ -9,8 +9,6 @@ public class Portfolio {
 
     private String createDate;
 
-    private Double portfolioChangeRate;
-
     public String getPortfolioId() {
         return portfolioId;
     }
@@ -41,13 +39,5 @@ public class Portfolio {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate == null ? null : createDate.trim();
-    }
-
-    public Double getPortfolioChangeRate() {
-        return portfolioChangeRate;
-    }
-
-    public void setPortfolioChangeRate(Double portfolioChangeRate) {
-        this.portfolioChangeRate = portfolioChangeRate;
     }
 }

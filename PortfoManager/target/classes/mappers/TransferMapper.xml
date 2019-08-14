@@ -9,81 +9,9 @@
     <result column="requester_id" property="requesterId" jdbcType="CHAR" />
     <result column="receiver_id" property="receiverId" jdbcType="CHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     transfer_id, request_date, start_date, end_date, requester_id, receiver_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.citi.portfolio.model.TransferExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from transfer
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -93,12 +21,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from transfer
     where transfer_id = #{transferId,jdbcType=CHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.citi.portfolio.model.TransferExample" >
-    delete from transfer
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Transfer" >
     insert into transfer (transfer_id, request_date, start_date, 
@@ -151,50 +73,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.citi.portfolio.model.TransferExample" resultType="java.lang.Integer" >
-    select count(*) from transfer
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update transfer
-    <set >
-      <if test="record.transferId != null" >
-        transfer_id = #{record.transferId,jdbcType=CHAR},
-      </if>
-      <if test="record.requestDate != null" >
-        request_date = #{record.requestDate,jdbcType=CHAR},
-      </if>
-      <if test="record.startDate != null" >
-        start_date = #{record.startDate,jdbcType=CHAR},
-      </if>
-      <if test="record.endDate != null" >
-        end_date = #{record.endDate,jdbcType=CHAR},
-      </if>
-      <if test="record.requesterId != null" >
-        requester_id = #{record.requesterId,jdbcType=CHAR},
-      </if>
-      <if test="record.receiverId != null" >
-        receiver_id = #{record.receiverId,jdbcType=CHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update transfer
-    set transfer_id = #{record.transferId,jdbcType=CHAR},
-      request_date = #{record.requestDate,jdbcType=CHAR},
-      start_date = #{record.startDate,jdbcType=CHAR},
-      end_date = #{record.endDate,jdbcType=CHAR},
-      requester_id = #{record.requesterId,jdbcType=CHAR},
-      receiver_id = #{record.receiverId,jdbcType=CHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.model.Transfer" >
     update transfer
     <set >

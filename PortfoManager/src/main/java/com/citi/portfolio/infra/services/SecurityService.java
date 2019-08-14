@@ -8,7 +8,7 @@ public interface SecurityService {
 
     Result readSecurity(String securityId);
 
-    Result readSecurityList(String search, String securityType, int page);
+    Result readSecurityList(String search, String securityType, int page, int pagesize);
 
     Result updateSecurity(Security Record);
 

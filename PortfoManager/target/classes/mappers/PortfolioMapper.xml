@@ -6,206 +6,31 @@
     <result column="portfolio_name" property="portfolioName" jdbcType="CHAR" />
     <result column="manager_id" property="managerId" jdbcType="CHAR" />
     <result column="create_date" property="createDate" jdbcType="CHAR" />
-    <result column="portfolio_change_rate" property="portfolioChangeRate" jdbcType="DOUBLE" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    portfolio_id, portfolio_name, manager_id, create_date, portfolio_change_rate
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.citi.portfolio.model.PortfolioExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from portfolio
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from portfolio
-    where portfolio_id = #{portfolioId,jdbcType=CHAR}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from portfolio
     where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.citi.portfolio.model.PortfolioExample" >
-    delete from portfolio
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Portfolio" >
     insert into portfolio (portfolio_id, portfolio_name, manager_id, 
-      create_date, portfolio_change_rate)
+      create_date)
     values (#{portfolioId,jdbcType=CHAR}, #{portfolioName,jdbcType=CHAR}, #{managerId,jdbcType=CHAR}, 
-      #{createDate,jdbcType=CHAR}, #{portfolioChangeRate,jdbcType=DOUBLE})
+      #{createDate,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.citi.portfolio.model.Portfolio" >
-    insert into portfolio
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="portfolioId != null" >
-        portfolio_id,
-      </if>
-      <if test="portfolioName != null" >
-        portfolio_name,
-      </if>
-      <if test="managerId != null" >
-        manager_id,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-      <if test="portfolioChangeRate != null" >
-        portfolio_change_rate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="portfolioId != null" >
-        #{portfolioId,jdbcType=CHAR},
-      </if>
-      <if test="portfolioName != null" >
-        #{portfolioName,jdbcType=CHAR},
-      </if>
-      <if test="managerId != null" >
-        #{managerId,jdbcType=CHAR},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=CHAR},
-      </if>
-      <if test="portfolioChangeRate != null" >
-        #{portfolioChangeRate,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.citi.portfolio.model.PortfolioExample" resultType="java.lang.Integer" >
-    select count(*) from portfolio
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update portfolio
-    <set >
-      <if test="record.portfolioId != null" >
-        portfolio_id = #{record.portfolioId,jdbcType=CHAR},
-      </if>
-      <if test="record.portfolioName != null" >
-        portfolio_name = #{record.portfolioName,jdbcType=CHAR},
-      </if>
-      <if test="record.managerId != null" >
-        manager_id = #{record.managerId,jdbcType=CHAR},
-      </if>
-      <if test="record.createDate != null" >
-        create_date = #{record.createDate,jdbcType=CHAR},
-      </if>
-      <if test="record.portfolioChangeRate != null" >
-        portfolio_change_rate = #{record.portfolioChangeRate,jdbcType=DOUBLE},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update portfolio
-    set portfolio_id = #{record.portfolioId,jdbcType=CHAR},
-      portfolio_name = #{record.portfolioName,jdbcType=CHAR},
-      manager_id = #{record.managerId,jdbcType=CHAR},
-      create_date = #{record.createDate,jdbcType=CHAR},
-      portfolio_change_rate = #{record.portfolioChangeRate,jdbcType=DOUBLE}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.model.Portfolio" >
-    update portfolio
-    <set >
-      <if test="portfolioName != null" >
-        portfolio_name = #{portfolioName,jdbcType=CHAR},
-      </if>
-      <if test="managerId != null" >
-        manager_id = #{managerId,jdbcType=CHAR},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=CHAR},
-      </if>
-      <if test="portfolioChangeRate != null" >
-        portfolio_change_rate = #{portfolioChangeRate,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where portfolio_id = #{portfolioId,jdbcType=CHAR}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Portfolio" >
     update portfolio
     set portfolio_name = #{portfolioName,jdbcType=CHAR},
       manager_id = #{managerId,jdbcType=CHAR},
-      create_date = #{createDate,jdbcType=CHAR},
-      portfolio_change_rate = #{portfolioChangeRate,jdbcType=DOUBLE}
+      create_date = #{createDate,jdbcType=CHAR}
     where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select portfolio_id, portfolio_name, manager_id, create_date
+    from portfolio
+    where portfolio_id = #{portfolioId,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select portfolio_id, portfolio_name, manager_id, create_date
+    from portfolio
+  </select>
 </mapper>

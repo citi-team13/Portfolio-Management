@@ -1,6 +1,8 @@
 package com.citi.portfolio.model;
 
-public class Security {
+import java.io.Serializable;
+
+public class Security implements Serializable {
     private String securityId;
 
     private String securityName;

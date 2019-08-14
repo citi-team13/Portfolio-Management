@@ -5,192 +5,39 @@
     <id column="security_id" property="securityId" jdbcType="CHAR" />
     <id column="value_date" property="valueDate" jdbcType="CHAR" />
     <result column="value" property="value" jdbcType="DECIMAL" />
-    <result column="price_change_rate" property="priceChangeRate" jdbcType="DOUBLE" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    security_id, value_date, value, price_change_rate
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.citi.portfolio.model.PriceExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from price
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
-    select 
-    <include refid="Base_Column_List" />
-    from price
-    where security_id = #{securityId,jdbcType=CHAR}
-      and value_date = #{valueDate,jdbcType=CHAR}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from price
     where security_id = #{securityId,jdbcType=CHAR}
       and value_date = #{valueDate,jdbcType=CHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.citi.portfolio.model.PriceExample" >
-    delete from price
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Price" >
-    insert into price (security_id, value_date, value, 
-      price_change_rate)
-    values (#{securityId,jdbcType=CHAR}, #{valueDate,jdbcType=CHAR}, #{value,jdbcType=DECIMAL}, 
-      #{priceChangeRate,jdbcType=DOUBLE})
+    insert into price (security_id, value_date, value
+      )
+    values (#{securityId,jdbcType=CHAR}, #{valueDate,jdbcType=CHAR}, #{value,jdbcType=DECIMAL}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.citi.portfolio.model.Price" >
-    insert into price
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="securityId != null" >
-        security_id,
-      </if>
-      <if test="valueDate != null" >
-        value_date,
-      </if>
-      <if test="value != null" >
-        value,
-      </if>
-      <if test="priceChangeRate != null" >
-        price_change_rate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="securityId != null" >
-        #{securityId,jdbcType=CHAR},
-      </if>
-      <if test="valueDate != null" >
-        #{valueDate,jdbcType=CHAR},
-      </if>
-      <if test="value != null" >
-        #{value,jdbcType=DECIMAL},
-      </if>
-      <if test="priceChangeRate != null" >
-        #{priceChangeRate,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.citi.portfolio.model.PriceExample" resultType="java.lang.Integer" >
-    select count(*) from price
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update price
-    <set >
-      <if test="record.securityId != null" >
-        security_id = #{record.securityId,jdbcType=CHAR},
-      </if>
-      <if test="record.valueDate != null" >
-        value_date = #{record.valueDate,jdbcType=CHAR},
-      </if>
-      <if test="record.value != null" >
-        value = #{record.value,jdbcType=DECIMAL},
-      </if>
-      <if test="record.priceChangeRate != null" >
-        price_change_rate = #{record.priceChangeRate,jdbcType=DOUBLE},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update price
-    set security_id = #{record.securityId,jdbcType=CHAR},
-      value_date = #{record.valueDate,jdbcType=CHAR},
-      value = #{record.value,jdbcType=DECIMAL},
-      price_change_rate = #{record.priceChangeRate,jdbcType=DOUBLE}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.model.Price" >
-    update price
-    <set >
-      <if test="value != null" >
-        value = #{value,jdbcType=DECIMAL},
-      </if>
-      <if test="priceChangeRate != null" >
-        price_change_rate = #{priceChangeRate,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where security_id = #{securityId,jdbcType=CHAR}
-      and value_date = #{valueDate,jdbcType=CHAR}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.model.Price" >
     update price
-    set value = #{value,jdbcType=DECIMAL},
-      price_change_rate = #{priceChangeRate,jdbcType=DOUBLE}
+    set value = #{value,jdbcType=DECIMAL}
     where security_id = #{securityId,jdbcType=CHAR}
       and value_date = #{valueDate,jdbcType=CHAR}
   </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select security_id, value_date, value
+    from price
+    where security_id = #{securityId,jdbcType=CHAR}
+      and value_date = #{valueDate,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select security_id, value_date, value
+    from price
+    order by security_id, value_date
+  </select>
+  <select id="selectBySecurityId" resultMap="BaseResultMap">
+    select security_id, value_date, value
+    from price
+    where security_id = #{securityId,jdbcType=CHAR}
+    order by value_date
+  </select>
 </mapper>

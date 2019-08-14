@@ -1,15 +1,16 @@
 package com.citi.portfolio.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Price {
+public class Price implements Serializable {
     private String securityId;
 
     private String valueDate;
 
     private BigDecimal value;
 
-    private Double priceChangeRate;
+    private static final long serialVersionUID = 1L;
 
     public String getSecurityId() {
         return securityId;
@@ -33,13 +34,5 @@ public class Price {
 
     public void setValue(BigDecimal value) {
         this.value = value;
-    }
-
-    public Double getPriceChangeRate() {
-        return priceChangeRate;
-    }
-
-    public void setPriceChangeRate(Double priceChangeRate) {
-        this.priceChangeRate = priceChangeRate;
     }
 }

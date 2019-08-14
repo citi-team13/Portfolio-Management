@@ -6,11 +6,10 @@ import com.citi.portfolio.infra.services.UserService;
 import com.citi.portfolio.mapper.UserMapper;
 import com.citi.portfolio.model.User;
 
-import com.citi.portfolio.util.UUIDUtil;
+import com.citi.portfolio.util.GetData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.font.TrueTypeFont;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -53,12 +52,9 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public Result getCurrentUser(HttpSession session) {
-        User user = null;
-        String userid = session.getAttribute("userId").toString();
-        user = userMapper.selectByPrimaryKey(userid);
-        // 如果没有这个用户
+        User user = GetData.getCurrentUser(session);
         if (Assert.isNULL(user)) {
-            return Result.failure(402,"User's phone number is not exist or database is busy!");
+            return Result.failure(402,"There is no user login the system!");
         }else{
             Map map = buildUserDataMap(user);
             return Result.success(map,200,"Query current user successfully!");

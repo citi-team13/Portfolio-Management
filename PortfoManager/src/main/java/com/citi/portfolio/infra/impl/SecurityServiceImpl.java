@@ -79,7 +79,7 @@ public class SecurityServiceImpl implements SecurityService {
         Date yesterday = cal.getTime();
 
         List<Map> securityInfoList = securityMapper.readSecurityList(paramMap);
-        //todo 补上security的当天及昨天价格
+        //补上security的当天及昨天价格
         for (Map map:securityInfoList){
             Price priceToday = new Price();
             priceToday.setSecurityId((String) map.get("securityId"));

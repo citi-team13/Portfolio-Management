@@ -7,7 +7,6 @@ public class PortfolioDetails {
     private String securityId;
     private String securityName;
     private float position;
-    private double changeRate;
     private BigDecimal price;
 
     public String getCreateDate() {
@@ -34,20 +33,12 @@ public class PortfolioDetails {
         this.securityName = securityName;
     }
 
-    public double getPosition() {
+    public float getPosition() {
         return position;
     }
 
     public void setPosition(float position) {
         this.position = position;
-    }
-
-    public double getChangeRate() {
-        return changeRate;
-    }
-
-    public void setChangeRate(double changeRate) {
-        this.changeRate = changeRate;
     }
 
     public BigDecimal getPrice() {
@@ -65,7 +56,6 @@ public class PortfolioDetails {
                 ", securityId='" + securityId + '\'' +
                 ", securityName='" + securityName + '\'' +
                 ", position=" + position +
-                ", changeRate=" + changeRate +
                 ", price=" + price +
                 '}';
     }

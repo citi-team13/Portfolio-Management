@@ -4,6 +4,8 @@ import com.citi.portfolio.common.Result;
 import com.citi.portfolio.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpSession;
+
 public interface AdministratorService {
 
     Result createAFundManager(User Record);
@@ -17,6 +19,17 @@ public interface AdministratorService {
     Result updateFundManager(User user);
 
     Result deleteFundManager(String userId);
+
+//    Result getAllPortfolios();
+//
+//    Result getSecurityDetailList();
+
+    Result transferPortfolio(HttpSession session, String portfolioId, String receiverId);
+
+
+
+
+
 
 
 }

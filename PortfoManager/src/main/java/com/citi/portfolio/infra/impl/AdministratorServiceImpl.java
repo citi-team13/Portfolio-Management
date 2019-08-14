@@ -3,14 +3,19 @@ package com.citi.portfolio.infra.impl;
 import com.citi.portfolio.common.Assert;
 import com.citi.portfolio.common.Result;
 import com.citi.portfolio.infra.services.AdministratorService;
+import com.citi.portfolio.mapper.PortfolioMapper;
 import com.citi.portfolio.mapper.UserMapper;
+import com.citi.portfolio.model.Portfolio;
 import com.citi.portfolio.model.User;
+import com.citi.portfolio.util.GetData;
 import com.citi.portfolio.util.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -18,6 +23,9 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    PortfolioMapper portfolioMapper;
 
     @Override
     public Result createAFundManager (User user) {
@@ -81,4 +89,23 @@ public class AdministratorServiceImpl implements AdministratorService {
             return Result.failure(401,"delete fund manager failure!");
         }
     }
+
+    @Override
+    public Result transferPortfolio(HttpSession session, String portfolioId, String receiverId){
+        if(GetData.checkAuthority(0, session)){
+            Portfolio portfolio = portfolioMapper.selectByPrimaryKey(portfolioId);
+            portfolio.setManagerId(receiverId);
+            if(portfolioMapper.updateByPrimaryKeySelective(portfolio)>0){
+                return Result.success(portfolio,200,"success!");
+            }else{
+                return Result.failure(401,"transfer portfolio failure!");
+            }
+        }
+        else {
+            return Result.failure(402,"Transfer portfolio failure for your login status or the authority!");
+        }
+
+    }
+
+
 }

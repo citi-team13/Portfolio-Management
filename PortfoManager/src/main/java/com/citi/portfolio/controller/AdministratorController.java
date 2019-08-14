@@ -10,6 +10,8 @@ import com.citi.portfolio.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("administrator")
 public class AdministratorController {
@@ -132,6 +134,18 @@ public class AdministratorController {
     @ResponseBody
     public Result deleteSecurity(@PathVariable(value = "security_id") String security_id){
         return administratorService.deleteFundManager(security_id);
+    }
+
+    /**
+     * 转移
+     */
+    @PostMapping("/funduser/{targetId, portfolioId}")
+    @ResponseBody
+    public Result transferPortfolio(HttpSession session,
+                                    @RequestParam(value = "targetId") String target_id,
+                                    @RequestParam(value = "portfolioId") String portfolio_id){
+
+        return administratorService.transferPortfolio(session, target_id,portfolio_id);
     }
 
 

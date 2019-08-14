@@ -10,13 +10,5 @@ public interface UserService {
 
     Result getCurrentUser(HttpSession session);
 
-//
-//    Result getFundUserDetail(String userId);
-//
-//    Result getFundUserList();
-//
-//    Result updateFundUser(User user);
-//
-//    Result deleteFundUser(String userId);
 
 }

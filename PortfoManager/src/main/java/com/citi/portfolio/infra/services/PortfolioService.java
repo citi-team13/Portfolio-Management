@@ -10,4 +10,8 @@ public interface PortfolioService {
     Result getAPortfolio(String portfolioId);
 
     Result getPortfolioList(HttpSession session);
+
+    Result getAllPrice(String portfolioId);
+
+    Result getRecentPrice(String portfolioId, String lastDate);
 }

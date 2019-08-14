@@ -6,11 +6,10 @@
     <result column="portfolio_name" property="portfolioName" jdbcType="CHAR" />
     <result column="manager_id" property="managerId" jdbcType="CHAR" />
     <result column="create_date" property="createDate" jdbcType="CHAR" />
-    <result column="portfolio_change_rate" property="portfolioChangeRate" jdbcType="DOUBLE" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    portfolio_id, portfolio_name, manager_id, create_date, portfolio_change_rate
+    portfolio_id, portfolio_name, manager_id, create_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -24,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.model.Portfolio" >
     insert into portfolio (portfolio_id, portfolio_name, manager_id, 
-      create_date, portfolio_change_rate)
+      create_date)
     values (#{portfolioId,jdbcType=CHAR}, #{portfolioName,jdbcType=CHAR}, #{managerId,jdbcType=CHAR}, 
-      #{createDate,jdbcType=CHAR}, #{portfolioChangeRate,jdbcType=DOUBLE})
+      #{createDate,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.citi.portfolio.model.Portfolio" >
     insert into portfolio
@@ -43,9 +42,6 @@
       <if test="createDate != null" >
         create_date,
       </if>
-      <if test="portfolioChangeRate != null" >
-        portfolio_change_rate,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="portfolioId != null" >
@@ -59,9 +55,6 @@
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=CHAR},
-      </if>
-      <if test="portfolioChangeRate != null" >
-        #{portfolioChangeRate,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -77,9 +70,6 @@
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=CHAR},
       </if>
-      <if test="portfolioChangeRate != null" >
-        portfolio_change_rate = #{portfolioChangeRate,jdbcType=DOUBLE},
-      </if>
     </set>
     where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </update>
@@ -87,20 +77,58 @@
     update portfolio
     set portfolio_name = #{portfolioName,jdbcType=CHAR},
       manager_id = #{managerId,jdbcType=CHAR},
-      create_date = #{createDate,jdbcType=CHAR},
-      portfolio_change_rate = #{portfolioChangeRate,jdbcType=DOUBLE}
+      create_date = #{createDate,jdbcType=CHAR}
     where portfolio_id = #{portfolioId,jdbcType=CHAR}
   </update>
 
+  <select id="selectByPortfolioName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from portfolio
+    where portfolioName = #{portfolioName,jdbcType=CHAR}
+  </select>
+
   <select id="selectAllForCurrentUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select portfolioId, portfolioName, ownerId, changeRate
+    select portfolioId, portfolioName, ownerId
     from portfolio
     where ownerId = #{userId,jdbcType=CHAR}
   </select>
 
   <select id="selectPortfolioDetail" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select item.create_date, item.security_id, se.security_name, pos.position_value, pr.price_change_rate, pr.value
-    from portfolio_item as item, security as se, position as pos, price as pr
-    where item.security_id = se.security_id and item.security_id = pos.security_id and pr.security_id = item.security_id
+    select sub.create_date, sub.security_id, sub.security_name, sub.position_value, pr.value
+    from
+    (
+	    select * from (select portfolio_id as mportfolio_id, security_id as msecurity_id, position_value from position)subPosition
+	    join
+	    (select item.portfolio_id, item.create_date, item.security_id, se.security_name from portfolio_item as item, security as se
+	    where item.portfolio_id = #{portfolioId,jdbcType=CHAR} and item.security_id = se.security_id)temp
+	    on subPosition.msecurity_id = temp.security_id and subPosition.mportfolio_id = temp.portfolio_id
+    )sub, price as pr where sub.security_id = pr.security_id and pr.value_date = #{currentDate,jdbcType=CHAR};
+  </select>
+
+  <select id="getAllPrice" resultType="java.util.HashMap" parameterType="java.lang.String" >
+    select sub.portfolio_id as ID, sub.portfolio_name as Name, sub.value_date as Date, sum(sub.position_value*sub.value) as Price
+    from
+    (
+	    select * from (select portfolio_id as mportfolio_id, portfolio_name from portfolio)subPortfolio
+	    join
+	    (select ps.portfolio_id, ps.position_value, pr.value, pr.value_date from position as ps, price as pr
+	    where ps.security_id = pr.security_id and ps.portfolio_id = #{portfolioId,jdbcType=CHAR}) temp
+	    on temp.portfolio_id = subPortfolio.mportfolio_id
+	    order by temp.value_date
+    )sub group by Date
+  </select>
+
+  <select id="getRecentPrice" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from (
+    select sub.portfolio_id as ID, sub.portfolio_name as Name, sub.value_date as Date, sum(sub.position_value*sub.value) as Price
+        from
+        (
+	        select * from (select portfolio_id as mportfolio_id, portfolio_name from portfolio)subPortfolio
+	        join
+	        (select ps.portfolio_id, ps.position_value, pr.value, pr.value_date from position as ps, price as pr
+	        where ps.security_id = pr.security_id and ps.portfolio_id = #{portfolioId,jdbcType=CHAR}) temp
+	        on temp.portfolio_id = subPortfolio.mportfolio_id
+	        order by temp.value_date
+        )sub group by Date
+    ) temp where Date >= #{lastDate,jdbcType=CHAR};
   </select>
 </mapper>

@@ -55,7 +55,7 @@ public class UserController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/currentUser", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping("/currentuser")
     @ResponseBody
     public Result getCurrentUser(HttpSession session){
         return userService.getCurrentUser(session);

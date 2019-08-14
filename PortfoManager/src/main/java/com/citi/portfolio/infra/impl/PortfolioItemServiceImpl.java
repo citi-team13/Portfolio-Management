@@ -4,10 +4,10 @@ import com.citi.portfolio.common.Assert;
 import com.citi.portfolio.common.Result;
 import com.citi.portfolio.infra.services.PortfolioItemService;
 import com.citi.portfolio.mapper.PortfolioItemMapper;
+import com.citi.portfolio.mapper.PositionMapper;
 import com.citi.portfolio.model.PortfolioItem;
 import com.citi.portfolio.model.Position;
-import com.citi.portfolio.model.Price;
-import com.citi.portfolio.util.GetDate;
+import com.citi.portfolio.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,25 +19,32 @@ public class PortfolioItemServiceImpl implements PortfolioItemService {
     @Autowired
     PortfolioItemMapper portfolioItemMapper;
 
+    @Autowired
+    PositionMapper positionMapper;
+
     @Override
     public Result addAPortfolioItem(String portfolioId, String securityId, String positionValue) {
-        PortfolioItem item = new PortfolioItem();
+        // 判断security是否重复
+        PortfolioItem item = portfolioItemMapper.selectByPrimaryKey(portfolioId, securityId);
+        if (Assert.isNotNULL(item)){
+            return Result.failure(402,"Security is exist!");
+        }
+        String currentDate = DateUtil.getToday();
         item.setPortfolioId(portfolioId);
         item.setSecurityId(securityId);
-        item.setCreateDate(GetDate.getCurrentDate());
+        item.setCreateDate(currentDate);
 
-//        PortfolioItem temp = portfolioItemMapper.selectByPrimaryKey(item.setPortfolioId(),price.getValueDate());
-//        if (Assert.isNotNULL(temp)){
-//            return Result.failure(402,"price 历史已存在!");
-//        }
-//
-//        Position position = new Position();
-//        position.setPortfolioId(portfolioId);
-//        position.setSecurityId(securityId);
-//        position.setUpdateTime(GetDate.getCurrentDate());
-//        position.setPositionValue(Float.parseFloat(positionValue));
+        Position position = new Position();
+        position.setPortfolioId(portfolioId);
+        position.setSecurityId(securityId);
+        position.setUpdateTime(currentDate);
+        position.setPositionValue(Float.parseFloat(positionValue));
 
-        return Result.success(item,200,"success!");
+        if (portfolioItemMapper.insert(item) > 0 && positionMapper.insertSelective(position) > 0){
+            return Result.success(item,200,"success!");
+        }else {
+            return Result.failure(401,"Create fund manager failure!");
+        }
     }
 
 }

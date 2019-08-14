@@ -83,16 +83,16 @@
 
   <select id="selectByPortfolioName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select * from portfolio
-    where portfolioName = #{portfolioName,jdbcType=CHAR}
+    where portfolio_name = #{portfolioName,jdbcType=CHAR}
   </select>
 
   <select id="selectAllForCurrentUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select portfolioId, portfolioName, ownerId
+    select portfolio_id, portfolio_name, manager_id
     from portfolio
-    where ownerId = #{userId,jdbcType=CHAR}
+    where manager_id = #{userId,jdbcType=CHAR}
   </select>
 
-  <select id="selectPortfolioDetail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectPortfolioDetail" resultType="java.util.HashMap" parameterType="java.lang.String" >
     select sub.create_date, sub.security_id, sub.security_name, sub.position_value, pr.value
     from
     (
@@ -105,19 +105,21 @@
   </select>
 
   <select id="getAllPrice" resultType="java.util.HashMap" parameterType="java.lang.String" >
-    select sub.portfolio_id as ID, sub.portfolio_name as Name, sub.value_date as Date, sum(sub.position_value*sub.value) as Price
+    select sub.portfolio_id as ID, sub.portfolio_name as Name, sub.value_date as Date, sum(sub.position_value * sub.value) as Price
     from
     (
-	    select * from (select portfolio_id as mportfolio_id, portfolio_name from portfolio)subPortfolio
+	    select *
+	    from
+	        (select portfolio_id as mportfolio_id, portfolio_name from portfolio)subPortfolio
 	    join
-	    (select ps.portfolio_id, ps.position_value, pr.value, pr.value_date from position as ps, price as pr
-	    where ps.security_id = pr.security_id and ps.portfolio_id = #{portfolioId,jdbcType=CHAR}) temp
+	        (select ps.portfolio_id, ps.position_value, pr.value, pr.value_date from position as ps, price as pr
+	        where ps.security_id = pr.security_id and ps.portfolio_id = #{portfolioId,jdbcType=CHAR}) temp
 	    on temp.portfolio_id = subPortfolio.mportfolio_id
 	    order by temp.value_date
     )sub group by Date
   </select>
 
-  <select id="getRecentPrice" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getRecentPrice" resultType="java.util.HashMap" parameterType="java.lang.String" >
     select * from (
     select sub.portfolio_id as ID, sub.portfolio_name as Name, sub.value_date as Date, sum(sub.position_value*sub.value) as Price
         from

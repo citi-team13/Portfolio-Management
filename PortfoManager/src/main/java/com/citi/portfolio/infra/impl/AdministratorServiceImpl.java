@@ -7,6 +7,7 @@ import com.citi.portfolio.mapper.PortfolioMapper;
 import com.citi.portfolio.mapper.UserMapper;
 import com.citi.portfolio.model.Portfolio;
 import com.citi.portfolio.model.User;
+import com.citi.portfolio.util.DateUtil;
 import com.citi.portfolio.util.GetData;
 import com.citi.portfolio.util.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
         user.setUserId(UUIDUtil.generateShortUuid(User.getID_length()));
         if (userMapper.insertSelective(user) > 0){
+            user.setUserPwd("");
             return Result.success(user,200,"success!");
         }else {
             return Result.failure(401,"Create fund manager failure!");
@@ -61,14 +63,28 @@ public class AdministratorServiceImpl implements AdministratorService {
         if (Assert.isNULL(user)) {
             return Result.failure(402,"The Fund manager is not exist!");
         }
-        return Result.success(user,200,"success!");
+        List<Map> portfolioDetail  = portfolioMapper.selectPortfolioDetail(userId, DateUtil.getToday());
+//        List<Map> portfolioDetail  = portfolioMapper.selectPortfolioDetail(userId, "");
+        if(Assert.isNULL(portfolioDetail)){
+            return Result.failure(401,"This manager's portfolio information can not access now.");
+        }
+        return Result.success(portfolioDetail,200,"success!");
     }
 
 
     @Override
     public Result getFundManagerList() {
         List<User> userList = userMapper.listAllFundManager();
-        return Result.success(userList,200,"success!");
+        if(Assert.isNULL(userList)){
+            return Result.failure(401, "Can not get the manager list");
+        }
+        else{
+            for (User user : userList) {
+                user.setUserPwd(null);
+            }
+            return Result.success(userList,200,"success!");
+        }
+
     }
 
     @Override

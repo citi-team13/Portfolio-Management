@@ -28,9 +28,9 @@ public interface PortfolioMapper {
 
     List<Portfolio> selectAllForCurrentUser(String userId);
 
-    List<PortfolioDetails> selectPortfolioDetail(String portfolioid, String currentDate);
+    List<Map> selectPortfolioDetail(String portfolioId, String currentDate);
 
-    List<Map> getAllPrice(String portfolioid);
+    List<Map> getAllPrice(String portfolioId);
 
-    List<PortfolioPriceDetail> getRecentPrice(String portfolioid, String lastDate);
+    List<Map> getRecentPrice(String portfolioId, String lastDate);
 }

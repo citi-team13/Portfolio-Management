@@ -5,8 +5,6 @@ import com.citi.portfolio.common.Result;
 import com.citi.portfolio.infra.services.PortfolioService;
 import com.citi.portfolio.mapper.PortfolioMapper;
 import com.citi.portfolio.model.Portfolio;
-import com.citi.portfolio.model.PortfolioDetails;
-import com.citi.portfolio.model.PortfolioPriceDetail;
 import com.citi.portfolio.util.DateUtil;
 import com.citi.portfolio.util.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +42,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Override
     public Result getAPortfolio(String portfolioId) {
         String currentDate = DateUtil.getToday();
-        List<PortfolioDetails> ps = portfolioMapper.selectPortfolioDetail(portfolioId, currentDate);
+        List<Map> ps = portfolioMapper.selectPortfolioDetail(portfolioId, currentDate);
         return Result.success(ps,200,"success!");
     }
 
@@ -57,13 +55,19 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Result getAllPrice(String portfolioId) {
+//        System.out.println(portfolioId);
         List<Map> priceList = portfolioMapper.getAllPrice(portfolioId);
+        if(Assert.isNULL(priceList)){
+            return Result.failure(401,"Price data can not access!");
+        }
         return Result.success(priceList,200,"success!");
     }
 
     @Override
     public Result getRecentPrice(String portfolioId, String lastDate) {
-        List<PortfolioPriceDetail> priceList = portfolioMapper.getRecentPrice(portfolioId, lastDate);
+        List<Map> priceList = portfolioMapper.getRecentPrice(portfolioId, lastDate);
         return Result.success(priceList,200,"success!");
     }
+
+
 }

@@ -4,7 +4,6 @@ import com.citi.portfolio.common.Result;
 import com.citi.portfolio.infra.services.AdministratorService;
 import com.citi.portfolio.infra.services.PriceService;
 import com.citi.portfolio.infra.services.SecurityService;
-import com.citi.portfolio.infra.services.UserService;
 import com.citi.portfolio.model.Price;
 import com.citi.portfolio.model.Security;
 import com.citi.portfolio.model.User;
@@ -134,6 +133,8 @@ public class AdministratorController {
     public Result deleteSecurity(@PathVariable(value = "security_id") String security_id){
         return administratorService.deleteFundManager(security_id);
     }
+
+
 
 
 

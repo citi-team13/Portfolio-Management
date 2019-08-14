@@ -75,7 +75,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public Result deleteFundManager(String userId) {
-        if (userMapper.deleteByPrimaryKey(userId)>0){
+        if (userMapper.deleteByPrimaryKey(userId) > 0){
             return Result.success(userId,200,"success!");
         }else {
             return Result.failure(401,"delete fund manager failure!");

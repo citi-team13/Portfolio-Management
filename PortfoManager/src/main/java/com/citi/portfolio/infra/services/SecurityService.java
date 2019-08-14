@@ -13,4 +13,6 @@ public interface SecurityService {
     Result updateSecurity(Security Record);
 
     Result deleteSecurity(String securityId);
+
+    Result getAllSecurityClassify();
 }

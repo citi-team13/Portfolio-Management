@@ -4,9 +4,11 @@ import com.citi.portfolio.common.Assert;
 import com.citi.portfolio.common.Result;
 import com.citi.portfolio.infra.services.SecurityService;
 import com.citi.portfolio.mapper.PriceMapper;
+import com.citi.portfolio.mapper.SecurityClassifyMapper;
 import com.citi.portfolio.mapper.SecurityMapper;
 import com.citi.portfolio.model.Price;
 import com.citi.portfolio.model.Security;
+import com.citi.portfolio.model.SecurityClassify;
 import com.citi.portfolio.util.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
     private PriceMapper priceMapper;
+
+    @Autowired
+    private SecurityClassifyMapper securityClassifyMapper;
 
     @Override
     public Result createSecurity(Security security) {
@@ -115,11 +120,22 @@ public class SecurityServiceImpl implements SecurityService {
         }
     }
 
+    @Override
     public Result deleteSecurity(String securityId){
         if (securityMapper.deleteByPrimaryKey(securityId)>0){
             return Result.success(securityId,200,"success!");
         }else {
             return Result.failure(401,"delete security failure!");
+        }
+    }
+
+    @Override
+    public Result getAllSecurityClassify(){
+        List<SecurityClassify> sc = securityClassifyMapper.selectAll();
+        if(Assert.isNULL(sc)){
+            return Result.failure(402,"success!");
+        }else{
+            return Result.success(sc,200,"success!");
         }
     }
 }

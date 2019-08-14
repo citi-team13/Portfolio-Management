@@ -33,4 +33,10 @@ public class SecurityController {
                                    @PathVariable(value = "pagesize") int pageSize){
         return securityService.readSecurityList(search, security_type, page, pageSize);
     }
+
+    @GetMapping("/classify")
+    @ResponseBody
+    public Result getSecurityClassify(){
+        return securityService.getAllSecurityClassify();
+    }
 }
